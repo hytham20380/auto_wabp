@@ -26,7 +26,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
     });
 
   });
-  /*
+  
   it('Should Add New SMS Template Successfully', function () {
       const campaignsNeeded = 1;
       // to ensure the number is not repeated
@@ -35,10 +35,10 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
       while (usedSuffixes.size < campaignsNeeded) {
   // random values between 100 : 999
       const randomSuffix = Cypress._.random(100, 999);
-  // skip لو الرقم اتكرر
+  // skip if the number is repeated
       if (usedSuffixes.has(randomSuffix)) continue
       usedSuffixes.add(randomSuffix);
-  // استخدم القيمة من الـ fixture كـ base
+
       const TemplateBase = this.SMSTemplateData.TemplateName[0];
       const dynamicTemplateName = `${TemplateBase}${randomSuffix}`;
 
@@ -83,10 +83,10 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
     cy.get('input[formcontrolname="templateName"]').should('have.value','')
 
 })
-    */
+    
   it ('Should change the template to unavailable successfully',function(){
     SMSTemplate.openSearch();
-    SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
+    SMSTemplate.SerchByAvailablity();
     SMSTemplate.ChangeToNotAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template deactivated successfully')
 

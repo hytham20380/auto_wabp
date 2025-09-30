@@ -12,8 +12,8 @@ class AgentsPage {
 
         cy.get('input[data-placeholder="Full Name"]').type(FullName);
         cy.get('input[formcontrolname="email"]').type(email);
-        cy.get('span.ng-star-inserted').contains('Select Role').click();
-        cy.get('#roleDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > .pure-checkbox > label').click();
+        cy.get('#roleDD .c-btn').click();
+        cy.get('.dropdown-list ul li').first().click();
 
         cy.get('body').then(($body) => {
 
@@ -101,7 +101,7 @@ class AgentsPage {
     changetoActive() {
         cy.wait(1000);
 
-        cy.contains('span.mat-slide-toggle-content', 'Not Active').should('be.visible').click();
+        cy.contains('span.mat-slide-toggle-contFent', 'Not Active').should('be.visible').click();
 
         cy.get('#mat-dialog-title-0').should('be.visible');
         cy.get('.mat-dialog-actions > .btn-black').click()
@@ -118,9 +118,6 @@ class AgentsPage {
 
 
     }
-
-
-
 
 }
 export default new AgentsPage();
