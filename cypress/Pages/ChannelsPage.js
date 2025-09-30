@@ -25,7 +25,7 @@ class ChannelsPage {
 
         cy.get('.custom-moda-style').should('be.visible');
         cy.get('.btn-black').click();
-
+    
     }
     CallCenterAvailability() {
 
