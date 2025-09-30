@@ -91,8 +91,6 @@ cy.get('.mat-form-field.ng-tns-c79-20 > .mat-form-field-wrapper > .mat-form-fiel
 
 
 
-
-
     }
     RemoveCustomCallCenter() {
         cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
@@ -106,6 +104,15 @@ cy.get('.mat-form-field.ng-tns-c79-20 > .mat-form-field-wrapper > .mat-form-fiel
     }
 
 
+RemoveCustomCallCenter2() {
+        cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
+        cy.get('ul.btn-group-actions-list li').first().find('button').click();
+        cy.get('mat-dialog-container#mat-dialog-0').contains('button', 'Delete').click();
+        cy.get('span').contains('Save').click()
 
+
+
+
+    }
 }
 export default new ChannelsPage();
