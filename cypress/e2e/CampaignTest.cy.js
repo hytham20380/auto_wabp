@@ -24,11 +24,11 @@ beforeEach(function () {
     cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
 });
   });
-/*
-it('Should create Onspot campaigns Successfully', function () {
-    const campaignsToCreate = 130; // or whatever number you want
 
-    for (let i = 125; i <= campaignsToCreate; i++) {
+it('Should create Onspot campaigns Successfully', function () {
+    const campaignsToCreate = 220; // or whatever number you want
+
+    for (let i = 215; i <= campaignsToCreate; i++) {
       const campaignBase = this.CampaignData.campaigns[0];
       const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
@@ -48,9 +48,9 @@ it('Should create Onspot campaigns Successfully', function () {
  
 
   it('Should create Scheduled campaigns Successfully', function () {
-    const campaignsToCreate = 155; // or whatever number you want
+    const campaignsToCreate = 100; // or whatever number you want
 
-    for (let i = 150; i <= campaignsToCreate; i++) {
+    for (let i = 105; i <= campaignsToCreate; i++) {
       const campaignBase = this.CampaignData.campaigns[0];
       const randomSuffix = Math.floor(100 + Math.random() * 900); // Random last 3 digits
       const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
@@ -70,7 +70,7 @@ it('Should create Onspot campaigns Successfully', function () {
     }
 
   });
-   */
+   
     it('Should Search by the Campaign Title Successfully', function () {
       CampaignPage.openSearch()
 

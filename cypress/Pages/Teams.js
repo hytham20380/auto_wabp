@@ -4,7 +4,7 @@ class TeamsPage {
   }
 
   enterName(name) {
-    cy.get('[formcontrolname="name"]').clear().type(name);
+    cy.get('[formcontrolname="Team Name"]').clear().type(name);
   }
 
   selectWorkingType() {
@@ -40,6 +40,8 @@ class TeamsPage {
   assertNoResults() {
     cy.contains('No teams found').should('exist');
   }
+
+  
 }
 
 module.exports = new TeamsPage();
