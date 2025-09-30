@@ -114,5 +114,15 @@ RemoveCustomCallCenter2() {
 
 
     }
+    RemoveCustomCallCenter3() {
+        cy.get(':nth-child(1) > .cdk-column-actions > .btn-group-actions-list > :nth-child(2) > .btn > span').click();
+        cy.get('ul.btn-group-actions-list li').first().find('button').click();
+        cy.get('mat-dialog-container#mat-dialog-0').contains('button', 'Delete').click();
+        cy.get('span').contains('Save').click()
+
+
+
+
+    }
 }
 export default new ChannelsPage();
