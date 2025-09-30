@@ -28,8 +28,10 @@ class PreMessagePage {
   }
 
   clickAdd() {
-    cy.contains('button', 'Add', { matchCase: false }).click();
-  }
+  cy.get('span[translate]').contains('Add New Message').click();
+
+}
+
 
   fillnewMessage(message) {
     cy.get('[formcontrolname="message"]').clear().type(message);
