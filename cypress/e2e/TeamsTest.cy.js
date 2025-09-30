@@ -18,6 +18,7 @@ describe('Teams Page Functionality', () => {
   });
 
   it('1. Search for existing team', function () {
+    TeamsPage.openSearch();
     TeamsPage.enterName(this.data.team.name);
     TeamsPage.clickSearch();
     TeamsPage.assertTeamVisible(this.data.team.name);

@@ -12,8 +12,8 @@ class AgentsPage {
 
         cy.get('input[data-placeholder="Full Name"]').type(FullName);
         cy.get('input[formcontrolname="email"]').type(email);
-        cy.get('#roleDD .c-btn').click();
-        cy.get('.dropdown-list ul li').first().click();
+        cy.get('span.ng-star-inserted').contains('Select Role').click();
+        cy.get('#roleDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > .pure-checkbox > label').first().click();
 
         cy.get('body').then(($body) => {
 

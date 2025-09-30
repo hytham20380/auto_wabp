@@ -1,3 +1,4 @@
+import 'cypress-file-upload';
 
 Cypress.Commands.add('login', (email, password) => {
   cy.visit('/auth/login');
@@ -11,4 +12,8 @@ Cypress.Commands.add('login', (email, password) => {
 // Correct login button locator using button text
 cy.contains('button', 'Login').should('be.visible').click();
 
+
 });
+
+
+
