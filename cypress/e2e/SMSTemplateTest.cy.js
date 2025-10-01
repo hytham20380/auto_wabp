@@ -26,7 +26,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
     });
 
   });
-  /*
+  
   it('Should Add New SMS Template Successfully', function () {
       const campaignsNeeded = 1;
       // to ensure the number is not repeated
@@ -83,7 +83,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
     cy.get('input[formcontrolname="templateName"]').should('have.value','')
 
 })
-    */
+    
   it ('Should change the template to unavailable successfully',function(){
     SMSTemplate.openSearch();
     SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
