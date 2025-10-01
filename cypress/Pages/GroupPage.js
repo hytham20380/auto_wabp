@@ -4,13 +4,13 @@ class GroupPage {
         cy.visit ('./pages/groups/index')
     }
     clickAdd() {
-         cy.get('button:contains("Add")');
+         cy.get('button:contains("Add")').click();
 
 
     }
    
 clickAddcontacts() {
-         cy.get('button:contains("Add")');
+         cy.get('button:contains("Add")').click();
 
 
     }
@@ -27,12 +27,12 @@ clickAddcontacts() {
     });
 }
 
-    enterGroupName(groupName) {
-    cy.get('[formcontrolname="groupName"]').clear().type(groupName);
+    addGroupName(groupName) {
+    cy.get('[formcontrolname="groupName"]').type(groupName);
    
     }
 
-    enterGroupName(updateName) {
+    updateGroupName(updateName) {
     cy.get('[formcontrolname="groupName"]').clear().type(updateName);
    
     }
@@ -130,7 +130,7 @@ Clickonsavebuttonforuploadfile(){
 }
 
 ExportGroup() {
-        cy.get('button[title="Export To Excel"]').click();
+        cy.get('.global-card > .card-head > .card-head-btns-wrapper > .btn').click();
 }
 
 ClickSearchButtonInFilePege(){
