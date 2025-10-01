@@ -1,16 +1,25 @@
 class TeamsPage {
   visit() {
-    cy.visit('https://qc-community.com/WABP_lib/AdminTool/pages/teams/index');
+    cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/teams/index');
   }
 
   enterName(name) {
-    cy.get('[formcontrolname="Team Name"]').clear().type(name);
+    cy.get('[formcontrolname="name"]').clear().type(name);
   }
 
   selectWorkingType() {
     // Assuming a mat-select is used, update this based on your actual UI
     cy.get('#mat-select-value-1').click();
     cy.get('.mat-option-text').contains("24/7").click();
+  }
+
+  updateWorkingType() {
+
+    cy.get('span').contains('Custom').click({ force: true });                // opens the dropdown
+
+    cy.get(':nth-child(1) > label').click();
+
+
   }
 
   clickSearch() {
@@ -26,11 +35,11 @@ class TeamsPage {
   }
 
   clickEdit() {
-    cy.get('.btn-primary-outline').first().click();
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c253-2').first().click();
   }
 
   clickSave() {
-    cy.get('[data-testid="save-btn"]').click();
+    cy.get('span').contains('Save').click();
   }
 
   assertTeamVisible(teamName) {
@@ -41,7 +50,18 @@ class TeamsPage {
     cy.contains('No teams found').should('exist');
   }
 
-  
+
+  openSearch() {
+    cy.get('div.search-form-expand-wrapper').then($wrapper => {
+      const isVisible = $wrapper.css('opacity') === '1';
+      if (!isVisible) {
+        cy.get('.card-head-btns-wrapper .btn-black').click();
+        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
+          .should('have.css', 'opacity', '1');
+      }
+    });
+  }
+
 }
 
 module.exports = new TeamsPage();

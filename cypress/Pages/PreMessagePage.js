@@ -5,14 +5,14 @@ class PreMessagePage {
     cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(4) > .subnav-link').click();
 
 
-    cy.visit('https://qc-community.com/WABP_lib/AdminTool/pages/preMessages/index');
+    cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/preMessages/index');
   }
   getSearchInput() {
     return cy.get('input[formcontrolname="message"]');
   }
 
-  enterSearchMessage(message) {
-    cy.get('[formcontrolname="message"]').type(message);
+  enterSearchMessage(editedMessage) {
+    cy.get('[formcontrolname="message"]').clear().type(editedMessage);
   }
 
   clickSearch() {
@@ -23,9 +23,11 @@ class PreMessagePage {
     cy.contains('button', 'Clear', { matchCase: false }).click();
   }
 
-  getSearchResults() {
-    return cy.get('table');
-  }
+  // PreMessagePage.js
+getSearchResults() {
+  return cy.get('table.mat-table tr'); // get table rows
+}
+
 
   clickAdd() {
   cy.get('span[translate]').contains('Add New Message').click();
@@ -57,6 +59,18 @@ class PreMessagePage {
     cy.get('.mat-dialog-actions > .btn-black').click()
   }
 
+
+
+  openSearch() {
+        cy.get('div.search-form-expand-wrapper').then($wrapper => {
+            const isVisible = $wrapper.css('opacity') === '1';
+            if (!isVisible) {
+                cy.get('.card-head-btns-wrapper .btn-black').click();
+                cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
+                  .should('have.css', 'opacity', '1');
+            }
+        });
+    }
 }
 
 export default new PreMessagePage();
