@@ -18,17 +18,17 @@ describe('Add New Group', () => {
   it('Add Normal Group', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.clickAdd();
-      GroupPage.enterGroupName(GroupData.groupName);
+      GroupPage.addGroupName(GroupData.groupName);
       GroupPage.selectGroupType(GroupData.groupType);
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Created Successfully');
     });
   });
-/*
+
   it('Update Group name and availability', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.clickEdit();
-      GroupPage.enterGroupName(GroupData.updateName);
+      GroupPage.updateGroupName(GroupData.updateName);
       GroupPage.updateAvailabilty();
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Updated Successfully');
@@ -178,7 +178,7 @@ it('Delete Normal Group', function () {
   it('Add Custom Group', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.clickAdd();
-      GroupPage.enterGroupName(GroupData.customGroupname);
+      GroupPage.updateGroupName(GroupData.customGroupname);
       GroupPage.selectGroupType(GroupData.customGrouptype);
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Created Successfully');
@@ -188,7 +188,7 @@ it('Delete Normal Group', function () {
   it('Update Custom Group name and availability', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.clickEdit();
-      GroupPage.enterGroupName(GroupData.updateCustomname);
+      GroupPage.updateGroupName(GroupData.updateCustomname);
       GroupPage.updateAvailabilty();
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Updated Successfully');
@@ -257,7 +257,7 @@ it('Delete Custom Group', function () {
 
     });
   }); 
-  */
+  
 
 }); 
 

@@ -25,6 +25,7 @@ describe('Teams Page Functionality', () => {
   });
 
   it('2. Clear search fields', function () {
+    TeamsPage.openSearch();
     TeamsPage.enterName(this.data.team.name);
     TeamsPage.selectWorkingType();
     TeamsPage.clickClear();
@@ -35,16 +36,15 @@ describe('Teams Page Functionality', () => {
   it('3. View team details', function () {
     TeamsPage.clickView(this.data.team.name);
 
-    // Replace with your actual element/content
+    // Replace with your actual element/contenttttt
     cy.url().should('include', '/teams/view');
   });
 
   it('4. Edit team info', function () {
-    TeamsPage.clickEdit(this.data.team.name);
+    TeamsPage.clickEdit();
     TeamsPage.enterName(this.data.editedTeam.name);
-    TeamsPage.selectWorkingType(this.data.editedTeam.workingType);
+    TeamsPage.updateWorkingType();
     TeamsPage.clickSave();
-
     TeamsPage.assertTeamVisible(this.data.editedTeam.name);
   });
 });
