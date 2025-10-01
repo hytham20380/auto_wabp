@@ -35,7 +35,7 @@ describe('Teams Page Functionality', () => {
   it('3. View team details', function () {
     TeamsPage.clickView(this.data.team.name);
 
-    // Replace with your actual element/content
+    // Replace with your actual element/contenttttt
     cy.url().should('include', '/teams/view');
   });
 
