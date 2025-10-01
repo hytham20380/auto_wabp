@@ -90,38 +90,51 @@ class CampaignPage {
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
     cy.get('span').contains('Scheduled').click();
     const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + 2); // Adds 2 days to the current date
-    futureDate.setHours(10); // Sets the hour to 10 AM
-    futureDate.setMinutes(0); // Sets the minutes to 00
+    futureDate.setDate(futureDate.getDate() + 2); // Adds 2 days
+    futureDate.setHours(10); // Sets hour to 10 AM
+    futureDate.setMinutes(0); // Sets minutes to 00
 
-    const day = futureDate.getDate(); // e.g., 12
-    const hour = futureDate.getHours(); // e.g., 10
-    const minute = futureDate.getMinutes(); // e.g., 0
-    const ampm = hour >= 12 ? 'PM' : 'AM'; // determines AM/PM
-    const displayHour = hour % 12 || 12; // convert to 12-hour format (e.g., 13 -> 1)
+    const day = futureDate.getDate();
+    const hour = futureDate.getHours();
+    const minute = futureDate.getMinutes();
+
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12; // convert 24h → 12h
+
+    // Open date picker
     cy.get('input[formcontrolname="sendingDateTime"]').click();
 
-    // Step 3: Select the day
-    cy.get('.mat-calendar-body-cell-content')
-      .contains(new RegExp(`^\\s*${day}\\s*$`))
-      .should('be.visible')
-      .click();
-    // Step 4: Fill in hour
+    // Pick the day (navigate month if needed)
+    cy.get('body').then(($body) => {
+      if ($body.find(`.mat-calendar-body-cell-content:contains(${day})`).length === 0) {
+        cy.get('.mat-calendar-next-button').click();
+      }
+
+      cy.get('.mat-calendar-body-cell-content')
+        .contains(new RegExp(`^\\s*${day}\\s*$`))
+        .click();
+    });
+
+    // Fill the hour
     cy.get('input[formcontrolname="hour"]')
       .clear()
       .type(displayHour.toString().padStart(2, '0'));
 
-    // Step 5: Fill in minutes
+    // Fill the minutes
     cy.get('input[formcontrolname="minute"]')
       .clear()
       .type(minute.toString().padStart(2, '0'));
 
-    // Step 6: Set AM/PM if needed
-    cy.get('button.mat-stroked-button').then(($btn) => {
-      if (!$btn.text().includes(ampm)) {
-        cy.wrap($btn).click(); // toggle to correct AM/PM
-      }
-    });
+    // Set AM/PM if needed
+    cy.get('button')
+      .contains(/AM|PM/)
+      .then(($btn) => {
+        if (!$btn.text().includes(ampm)) {
+          cy.wrap($btn).click();
+        }
+      });
+
+
     // Step 7: Confirm the selection
     cy.get('button mat-icon').contains('done').parents('button').click({ force: true });
 
@@ -176,15 +189,14 @@ class CampaignPage {
     cy.contains('button', 'Yes').click()
     cy.wait(500)
     // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
-
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const newValue = `Campaign-Rand-${randomSuffix}`;
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
     cy.get('span').contains('Onspot').click();
 
 
@@ -217,14 +229,13 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
-
+    const newValue = `Campaign-Rand-${randomSuffix}`;
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
 
     cy.get('span').contains('Scheduled').click();
     const futureDate = new Date();
@@ -292,14 +303,14 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+    const newValue = `Campaign-Rand-${randomSuffix}`;
 
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
 
     cy.get('span').contains('Onspot').click();
 
@@ -333,14 +344,13 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
-
+    const newValue = `Campaign-Rand-${randomSuffix}`;
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
 
 
     cy.get('span').contains('Normal').click();
@@ -369,7 +379,7 @@ class CampaignPage {
 
   NormalToCutom() {
 
-   cy.get('span').contains('Duplicate').click();
+    cy.get('span').contains('Duplicate').click();
 
     cy.get('mat-dialog-container').should('be.visible')
 
@@ -377,14 +387,14 @@ class CampaignPage {
     cy.wait(500)
     // Step: Generate random suffix
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`; // 👈 اسم جديد تمامًا
+    const newValue = `Campaign-Rand-${randomSuffix}`;
 
     // Step: Set new campaign name (overwrite completely)
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
 
 
     cy.get('span').contains('Customized').click();
@@ -428,9 +438,9 @@ class CampaignPage {
     cy.get('input[formcontrolname="name"]')
       .click({ force: true })
 
-      .invoke('val', '')       // 🧽 يمسح القيمة القديمة
-      .trigger('input')        // 🔄 يخلي Angular يحس بالتغيير
-      .type(newValue, { force: true }); // ✍️ يكتب الاسم الجديد
+      .invoke('val', '')
+      .trigger('input')
+      .type(newValue, { force: true });
 
 
 
@@ -443,7 +453,7 @@ class CampaignPage {
     cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
     cy.wait(500)
 
-    // تأكد أن العنصر ظاهر ومرئي بالكامل قبل الضغط
+
     cy.get('#templatesDD .c-btn')
       .should('exist')
       .then($btn => {

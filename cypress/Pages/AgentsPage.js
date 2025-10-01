@@ -101,7 +101,7 @@ class AgentsPage {
     changetoActive() {
         cy.wait(1000);
 
-        cy.contains('span.mat-slide-toggle-content', 'Not Active').should('be.visible').click();
+        cy.contains('span.mat-slide-toggle-contFent', 'Not Active').should('be.visible').click();
 
         cy.get('#mat-dialog-title-0').should('be.visible');
         cy.get('.mat-dialog-actions > .btn-black').click()
@@ -118,9 +118,6 @@ class AgentsPage {
 
 
     }
-
-
-
 
 }
 export default new AgentsPage();
