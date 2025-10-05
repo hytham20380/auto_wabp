@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import CampaignPage from '../Pages/CampaignPage';
 
 describe('Campaign Page Tests Using Fixtures', () => {

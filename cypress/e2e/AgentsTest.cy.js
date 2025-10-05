@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import AgentsPage from '../Pages/AgentsPage';
 
 describe('Agents Page Tests Using Fixtures', () => {

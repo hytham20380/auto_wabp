@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import SMSTemplate from '../Pages/SMSTemplatePage';
 
 describe('Shpuld Add New SMS Template Successfully  ', () => {

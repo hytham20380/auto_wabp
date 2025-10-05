@@ -1,5 +1,5 @@
 import TermsRolesPage from "../Pages/Terms&RolesPage";
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 
 describe('Terms&Roles Tests Using Fixtures', () => {
 
