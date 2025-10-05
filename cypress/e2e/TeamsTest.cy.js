@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import TeamsPage from '../Pages/Teams';
 
 describe('Teams Page Functionality', () => {

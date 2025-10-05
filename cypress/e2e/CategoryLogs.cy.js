@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import CategoryLogsPage from '../Pages/CategoryLogsPage';
 
 describe('Category Logs Page Tests', () => {
