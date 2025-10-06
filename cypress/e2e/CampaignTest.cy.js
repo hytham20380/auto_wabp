@@ -25,7 +25,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     });
   });
 
-/*
+
   it('Should create Onspot campaigns Successfully', function () {
 
     const campaignsNeeded = 1;
@@ -85,7 +85,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     }
 
   });
-  */
+ 
 
   it('Should create Scheduled campaigns Successfully', function () {
     const campaignsNeeded = 1;
