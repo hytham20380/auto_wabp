@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import AgentStatus from '../Pages/AgentStatusPage';
 
 describe('Agents Status Page Tests Using Fixtures', () => {
@@ -25,7 +25,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
     });
 
   });
-/*
+
   it ('Should Add New Active Status Successfully ', function(){
     const StausNeeded = 1;
 
@@ -134,7 +134,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   })
     
- */
+ 
   it('Should set an Online Status', function(){
     AgentStatus.SetActiveStatus()
   })
