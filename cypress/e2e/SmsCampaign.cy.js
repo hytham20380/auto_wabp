@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import SmsCampaignPage from '../pages/SmsCampaignPage';
 
 describe('Sms Campaign tests', () => {
