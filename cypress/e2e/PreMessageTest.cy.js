@@ -1,4 +1,4 @@
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../Pages/LoginPage';
 import PreMessagePage from '../Pages/PreMessagePage';
 
 
@@ -37,12 +37,15 @@ describe('Pre Message Page Tests', () => {
   });
 
   it('Should search by Message and display results', function () {
-    PreMessagePage.enterSearchMessage(this.data.editedMessage);
+    PreMessagePage.openSearch();
+    PreMessagePage.enterSearchMessage(this.data.editedMessage.Message);
     PreMessagePage.clickSearch();
-    PreMessagePage.getSearchResults().should('contain', this.data.editedMessage);
+    PreMessagePage.getSearchResults().should('contain.text', this.data.editedMessage.Message);
+
   });
 
   it('Should clear the search field', function () {
+    PreMessagePage.openSearch();
     PreMessagePage.enterSearchMessage(this.data.searchMessage);
     PreMessagePage.clickClear();
     PreMessagePage.getSearchInput().should('have.value', '');
