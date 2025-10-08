@@ -62,6 +62,11 @@ class TeamsPage {
     });
   }
 
+  Exportteams() {
+        cy.get('.btn-black-outline').click();
+
 }
 
-module.exports = new TeamsPage();
+}
+
+export default new TeamsPage();
