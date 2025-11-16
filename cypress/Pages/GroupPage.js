@@ -1,10 +1,11 @@
 class GroupPage {
 
     visit () {
-        cy.visit ('./pages/groups/index')
+        cy.visit ('./pages/groups/index');
     }
     clickAdd() {
-         cy.get('button:contains("Add")').click();
+         cy.contains('button', 'Add Group').click();
+
 
 
     }

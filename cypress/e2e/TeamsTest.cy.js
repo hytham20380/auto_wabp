@@ -13,7 +13,7 @@ describe('Teams Page Functionality', () => {
       // Wait for successful login (adjust the selector to match your app)
       cy.url().should('not.include', '/auth/login');
     });
-
+ 
     TeamsPage.visit();
   });
 
