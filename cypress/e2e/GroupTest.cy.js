@@ -10,9 +10,11 @@ describe('Add New Group', () => {
       LoginPage.visit();
       LoginPage.login(loginData.admin.email, loginData.admin.password);
       cy.url().should('include', '/pages/dashboard');
+    
     });
-
-    GroupPage.visit();
+   GroupPage.visit();
+   cy.url().should('include', '/pages/groups/index');
+    
   });
 
   it('Add Normal Group', function () {

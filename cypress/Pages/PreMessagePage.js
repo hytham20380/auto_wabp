@@ -2,10 +2,8 @@ class PreMessagePage {
   visit() {
 
     //cy.visit ('/preMessages/index');
-    cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(4) > .subnav-link').click();
+    cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(3) > .subnav-link > .nav-link-text').click();
 
-
-    cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/preMessages/index');
   }
   getSearchInput() {
     return cy.get('input[formcontrolname="message"]');
