@@ -29,8 +29,6 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
     // to ensure the number is not repeated
     const usedSuffixes = new Set();
-
-
     while (usedSuffixes.size < campaignsNeeded) {
       // random values between 100 : 999
       const randomSuffix = Cypress._.random(100, 999);
@@ -46,7 +44,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
       // choose the template randomly 
       const randomTemplate = Cypress._.sample(this.CampaignData.templateNames);
 
-      CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName);
+      CampaignPage.AddNewCampaignInfoTab(dynamicCampaignName,this.CampaignData.ChannelName);
       CampaignPage.ContactsTab(dynamicMobileNumber);
       CampaignPage.TemplateTab(randomTemplate);
       cy.wait(3000); // Waits for 3 seconds
@@ -76,15 +74,13 @@ describe('Campaign Page Tests Using Fixtures', () => {
       const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
 
 
-      CampaignPage.customGroupCamp(dynamicCampaignName, this.CampaignData.templateNames[1])
+      CampaignPage.customGroupCamp(dynamicCampaignName, this.CampaignData.templateNames[1], this.CampaignData.ChannelName)
 
       cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
     }
 
   });
   
-
-
   it('Should create Scheduled campaigns Successfully', function () {
     const campaignsNeeded = 1;
 
@@ -106,7 +102,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
       // choose the template randomly 
       const randomTemplate = Cypress._.sample(this.CampaignData.templateNames);
 
-      CampaignPage.ScheduleCampaignInfoTab(dynamicCampaignName);
+      CampaignPage.ScheduleCampaignInfoTab(dynamicCampaignName,this.CampaignData.ChannelName);
       CampaignPage.ContactsTab(dynamicMobileNumber);
       CampaignPage.TemplateTab(randomTemplate);
       cy.wait(3000); // Waits for 3 seconds

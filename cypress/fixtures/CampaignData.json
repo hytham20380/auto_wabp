@@ -7,14 +7,15 @@
       "BaseMobileNumber": "01273196"
     }
   ],
+  "ChannelName":"TND",
 
-  "NormalOnspot":"Normal Auto Camp Onspot",
-  "CustomOnspot":"Custom Auto Camp Onspot",
-  "NormalSchedual":"Normal Auto Camp schedualed",
-  "CustomSchedual":"Custom Auto Camp Schedualed",
+  "NormalOnspot":"Normal TND Camp Onspot",
+  "CustomOnspot":"Custom TND Camp Onspot",
+  "NormalSchedual":"Normal TND Camp schedualed",
+  "CustomSchedual":"Custom TND Camp Schedualed",
   
   "MobileNumber":"01017985099",
-  "randomcamp":"retest camp",
+  "randomcamp":"retest TND camp",
   "tempName":"image"
 
 

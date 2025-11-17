@@ -4,14 +4,15 @@ class CampaignPage {
 
   visitCampaign() {
     //cy.visit('pages/campaigns')
-    cy.contains('span.nav-link-text', 'Campaigns').click()
+    //cy.contains('span.nav-link-text').contains('Campaigns').click()
+    cy.get('#cdk-accordion-child-4 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(1) > .subnav-link').click()
 
   }
-  AddNewCampaignInfoTab(CampaignName) {
+  AddNewCampaignInfoTab(CampaignName,ChannelName) {
     cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
 
     cy.get('span').contains('Select Channel').click();
-    cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
+    cy.contains('li',ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
     cy.get('span').contains('Onspot').click();
     cy.get('span').contains('Normal').click();
@@ -54,11 +55,11 @@ class CampaignPage {
     cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
 
   }
-  customGroupCamp(CampaignName, TemplateName) {
+  customGroupCamp(CampaignName, TemplateName,ChannelName) {
     cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
 
     cy.get('span').contains('Select Channel').click();
-    cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
+    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
     cy.get('span').contains('Onspot').click();
     cy.get('span').contains('Customized').click();
@@ -83,10 +84,10 @@ class CampaignPage {
 
   }
 
-  ScheduleCampaignInfoTab(CampaignName) {
+  ScheduleCampaignInfoTab(CampaignName,ChannelName) {
     cy.get('span').contains('Create New Campaign').click();
     cy.get('span').contains('Select Channel').click();
-    cy.contains('li', 'Hytham WhatsApp Channel').find('input[type="checkbox"]').check({ force: true });
+    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
     cy.get('span').contains('Scheduled').click();
     const futureDate = new Date();
@@ -494,4 +495,4 @@ class CampaignPage {
 
 
 }
-export default new CampaignPage();
+export default new CampaignPage(); 
