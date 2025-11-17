@@ -101,7 +101,7 @@ enterMobilenumber(mobileNumber) {
 }
 
 searchWithmobileNumber(mobileNumber){
-cy.get('#mat-input-2').clear().type(mobileNumber);
+cy.get('[formcontrolname="mobileNumber"]').clear().type(mobileNumber);
 
 }
 
@@ -144,7 +144,8 @@ Clickonsavebuttonforuploadfile(){
 }
 
 ExportGroup() {
-        cy.get('.global-card > .card-head > .card-head-btns-wrapper > .btn').click();
+        cy.get('button[title="Export To Excel"]').click()
+
 }
 
 ClickSearchButtonInFilePege(){

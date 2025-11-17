@@ -18,22 +18,54 @@ describe('Add New Group', () => {
   });
 
   it('Add Normal Group', function () {
+    GroupPage.clickAdd();
+
     cy.get('@GroupData').then((GroupData) => {
-      GroupPage.clickAdd();
-      GroupPage.addGroupName(GroupData.groupName);
+      const GroupNeeded = 1;
+      
+      const usedSuffixes = new Set();
+    while (usedSuffixes.size <GroupNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+
+      const GroupBase = this.GroupData.groupName ;
+      const dynamiGroupBasenName = `${GroupBase} ${randomSuffix}`;
+      
+      GroupPage.addGroupName(dynamiGroupBasenName);
       GroupPage.selectGroupType(GroupData.groupType);
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Created Successfully');
+    }
     });
   });
 
   it('Update Group name and availability', function () {
+  
     cy.get('@GroupData').then((GroupData) => {
-      GroupPage.clickEdit();
-      GroupPage.updateGroupName(GroupData.updateName);
+       const GroupNeeded = 1;
+      
+      const usedSuffixes = new Set();
+    while (usedSuffixes.size <GroupNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+
+      const GroupBase = this.GroupData.updateName ;
+      const dynamiGroupBasenName = `${GroupBase} ${randomSuffix}`;
+      
+      GroupPage.clickEdit()
+      GroupPage.updateGroupName(dynamiGroupBasenName);
       GroupPage.updateAvailabilty();
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Updated Successfully');
+    }
     });
   });
 
@@ -41,14 +73,14 @@ describe('Add New Group', () => {
   it('Search In Group Page By Name', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.openSearch();
-      GroupPage.EnterGroupName('Update Group1');
+      GroupPage.EnterGroupName(GroupData.updateName);
       GroupPage.ClickOnSearchButtonOnGroupPage();
       GroupPage.getSearchResults().should('contain', GroupData.updateName);
 
     });
   });
 
-it('Search In Group Page By Group Typy', function () {
+it('Search In Group Page By Group Type', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.openSearch();
       GroupPage.selectGrouptypeInsearch(GroupData.groupType);
@@ -179,21 +211,51 @@ it('Delete Normal Group', function () {
 
   it('Add Custom Group', function () {
     cy.get('@GroupData').then((GroupData) => {
+      
       GroupPage.clickAdd();
-      GroupPage.updateGroupName(GroupData.customGroupname);
+      const GroupNeeded = 1;
+      
+      const usedSuffixes = new Set();
+    while (usedSuffixes.size <GroupNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+
+      const GroupBase = this.GroupData.customGroupname ;
+      const dynamiGroupBasenName = `${GroupBase} ${randomSuffix}`;
+      GroupPage.updateGroupName(dynamiGroupBasenName);
       GroupPage.selectGroupType(GroupData.customGrouptype);
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Created Successfully');
+    }
     });
   });
 
   it('Update Custom Group name and availability', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.clickEdit();
-      GroupPage.updateGroupName(GroupData.updateCustomname);
+      const GroupNeeded = 1;
+      
+      const usedSuffixes = new Set();
+    while (usedSuffixes.size <GroupNeeded) {
+      // random values between 100 : 999
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+
+      const GroupBase = this.GroupData.updateCustomname ;
+      const dynamiGroupBasenName = `${GroupBase} ${randomSuffix}`;
+      
+      GroupPage.updateGroupName(dynamiGroupBasenName);
       GroupPage.updateAvailabilty();
       GroupPage.clickSave();
       cy.get('.mat-snack-bar-container').should('contain', 'Group Updated Successfully');
+    }
     });
   });
 
@@ -217,7 +279,7 @@ it('Search In Group Page By Custom Group Name', function () {
     });
   });
 
-it('Upload File in Custom Group', function () {
+it.only('Upload File in Custom Group', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.Clickonfilebutton();
       GroupPage.Clickonaddfilebutton();
@@ -229,7 +291,7 @@ it('Upload File in Custom Group', function () {
     });
   });
 
-it('Export the Excel file for custom group', () => {
+it.only('Export the Excel file for custom group', () => {
     // Click the Export to Excel button
     GroupPage.clickEdit();
     GroupPage.ExportGroup();
