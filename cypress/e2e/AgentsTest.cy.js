@@ -29,12 +29,24 @@ describe('Agents Page Tests Using Fixtures', () => {
 
 
   it('Should add a new agent successfully', function () {
-    const integrationId = Math.floor(1000 + Math.random() * 9000).toString();
+  // Generate random suffix between 100–999
+  const randomSuffix = Cypress._.random(100, 999);
 
-    AgentsPage.AddNewAgent(this.AgentsData.FullName, this.AgentsData.email, integrationId);
+  // Build dynamic agent name & email
+  const dynamicFullName = `${this.AgentsData.FullName} ${randomSuffix}`;
+  const dynamicEmail = `${randomSuffix}_${this.AgentsData.email}`;
 
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent created successfully');
-  });
+  // Random integration ID also
+  const integrationId = Math.floor(1000 + Math.random() * 9000).toString();
+
+  // Use dynamic values
+  AgentsPage.AddNewAgent(dynamicFullName, dynamicEmail, integrationId);
+
+  cy.get('.mat-simple-snack-bar-content')
+    .should('contain', 'Agent created successfully');
+    
+});
+
 
   it('Search by Name', function () {
 
@@ -62,11 +74,25 @@ describe('Agents Page Tests Using Fixtures', () => {
 
 
   it('Edit name and email', function () {
-    AgentsPage.openSearch();
-    AgentsPage.SearchByName(this.AgentsData.FullName);
-   AgentsPage.EditAgent(this.AgentsData.editname, this.AgentsData.editemail)
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent updated successfully');
-  })
+  // Generate random suffix between 100–999
+  const randomSuffix = Cypress._.random(100, 999);
+
+  // Create dynamic edit name & email
+  const dynamicEditName = `${this.AgentsData.editname} ${randomSuffix}`;
+  const dynamicEditEmail = `${randomSuffix}_${this.AgentsData.editemail}`;
+
+  // Search using the original name
+  AgentsPage.openSearch();
+  AgentsPage.SearchByName(this.AgentsData.FullName);
+
+  // Edit using dynamic values
+  AgentsPage.EditAgent(dynamicEditName, dynamicEditEmail);
+
+  cy.get('.mat-simple-snack-bar-content')
+    .should('contain', 'Agent updated successfully');
+    
+});
+
 
 
   it('should Be the user not active ', function () {
