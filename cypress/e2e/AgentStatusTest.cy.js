@@ -26,7 +26,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   });
 
-  it ('Should Add New Active Status Successfully ', function(){
+  it('Should Add New Active Status Successfully ', function(){
     const StausNeeded = 1;
 
     // to ensure the number is not repeated
@@ -54,7 +54,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
   })
 
 
-   it ('Should Add New InActive Status Successfully ', function(){
+   it('Should Add New InActive Status Successfully ', function(){
     const StausNeeded = 1;
 
     // to ensure the number is not repeated
@@ -80,7 +80,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   })
    
-  it ('Should Edit a status Successfully',function () {
+  it('Should Edit a status Successfully',function () {
     const StausNeeded = 1;
 
     // to ensure the number is not repeated

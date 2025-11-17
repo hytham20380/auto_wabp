@@ -48,7 +48,7 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
     ClientsChatReport.SerchByAgentName(this.ClientsChatData.AgentName)
 
     cy.get('tbody > :nth-child(1) > .cdk-column-agentName').should('contain', this.ClientsChatData.AgentName)
-
+    
   })
   it('Should clear the fields succeefully  ', function () {
     ClientsChatReport.SearchByClientName(this.ClientsChatData.CleintName)
