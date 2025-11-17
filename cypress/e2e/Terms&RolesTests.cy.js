@@ -25,10 +25,19 @@ TermsRolesPage.visitRole();
 
 
 it('Should add a new Role successfully', function () {
-    TermsRolesPage.AddNewRole(this.TermsRolesData.AddRoleName);
-   
-   cy.get('.mat-simple-snack-bar-content').should('contain', 'Role created successfully');
-  });
+  // Generate random suffix between 100–999
+  const randomSuffix = Cypress._.random(100, 999);
+
+  // Build dynamic role name
+  const dynamicRoleName = `${this.TermsRolesData.AddRoleName} ${randomSuffix}`;
+
+  // Add new role using dynamic name
+  TermsRolesPage.AddNewRole(dynamicRoleName);
+
+  cy.get('.mat-simple-snack-bar-content')
+    .should('contain', 'Role created successfully');
+});
+
 
   it('Should Search by Name Role successfully', function () {
           TermsRolesPage.openSearch();
@@ -41,11 +50,19 @@ it('Should add a new Role successfully', function () {
   
   
    it('Should Edit the Role successfully', function () {
-    TermsRolesPage.EditRole(this.TermsRolesData.EditRoleName)
-    cy.get('.mat-simple-snack-bar-content').should('contain', 'Role updated successfully');
+  // Generate random suffix between 100–999
+  const randomSuffix = Cypress._.random(100, 999);
 
-   
-  });
+  // Build dynamic edited role name
+  const dynamicEditRoleName = `${this.TermsRolesData.EditRoleName} ${randomSuffix}`;
+
+  // Edit the role using dynamic value
+  TermsRolesPage.EditRole(dynamicEditRoleName);
+
+  cy.get('.mat-simple-snack-bar-content')
+    .should('contain', 'Role updated successfully');
+});
+
   
    it('Should clear the search successfully', function () {
       TermsRolesPage.openSearch();
