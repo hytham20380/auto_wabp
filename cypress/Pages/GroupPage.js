@@ -1,19 +1,41 @@
 class GroupPage {
 
+  // -------- Navigation --------
     visit () {
-        cy.visit ('./pages/groups/index')
+       cy.get('span.nav-link-text').contains('Groups').click();
     }
+    
+    // -------- Buttons --------
     clickAdd() {
-         cy.get('button:contains("Add")').click();
+         cy.contains('button', 'Add Group').click();
+}
 
-
-    }
    
-clickAddcontacts() {
+    clickAddcontacts() {
          cy.get('button:contains("Add")').click();
 
 
     }
+
+    clickSave() {
+    cy.contains('button', 'Save', { matchCase: false }).click();
+  }
+
+   clickEdit() {
+     cy.contains ('button', 'Edit').click();
+
+
+  }
+
+  ClickSaveFormanuallycontacts() {
+  cy.get('.mat-dialog-actions > .btn').click();
+}
+
+ClickOnSearchButtonOnGroupPage(){
+cy.get('.btn-search-actions-wrapper > .btn-black').click();
+}
+
+
 
     openSearch() {
     cy.get('div.search-form-expand-wrapper').then($wrapper => {
@@ -59,15 +81,9 @@ selectGroupAvailability(updateAvailability){
     cy.get('mat-option').contains(groupType).click();
   }
     
-   clickSave() {
-    cy.contains('button', 'Save', { matchCase: false }).click();
-  }
+   
 
-  clickEdit() {
-    cy.contains ('button', 'Edit').click();
-
-
-  }
+  
    
    searchGroupByName(groupName) {
   cy.get('[formcontrolname="groupName"]').clear().type(groupName);
@@ -77,9 +93,7 @@ AddContactsmanually() {
   cy.get('.btn-primary').click();
 }
 
-ClickSaveFormanuallycontacts() {
-  cy.get('.mat-dialog-actions > .btn').click();
-}
+
 
 
 enterMobilenumber(mobileNumber) {

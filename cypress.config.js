@@ -7,7 +7,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    downloadsFolder: "cypress/Downloads/" ,// ✅ specify your downloads directory
+    downloadsFolder: "cypress/Downloads/" , // ✅ specify your downloads directory
     experimentalSessionAndOrigin: true
   },
 });

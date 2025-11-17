@@ -1,6 +1,6 @@
 class TeamsPage {
   visit() {
-    cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/teams/index');
+    cy.get(':nth-child(6) > .subnav-link').click();
   }
 
   enterName(name) {

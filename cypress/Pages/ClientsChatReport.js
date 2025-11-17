@@ -1,7 +1,8 @@
 class ClientsChatReport {
     VisitClientsChatReport() {
         //cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/report/clientsChat');
-        cy.get('#cdk-accordion-child-6 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(2) > .subnav-link > .nav-link-text').click()
+        cy.get('#cdk-accordion-child-5 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(2) > .subnav-link > .nav-link-text').click();
+        
 
     }
     SearchByMobileNumber(MobileNumber) {

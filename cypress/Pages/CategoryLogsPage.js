@@ -1,6 +1,6 @@
 class CategoryLogsPage {
   visit() {
-    cy.visit('./pages/categoryLogs/index');
+    cy.get('span.nav-link-text').contains('Log Category Type').click();
   }            
 
 openSearch() {
