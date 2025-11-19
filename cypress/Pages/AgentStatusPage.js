@@ -1,7 +1,7 @@
 class AgentStatus {
 
     VisitAgentStatus() {
-        cy.get('span.nav-link-text').contains('Agent Statuses').click();
+        cy.contains('span', 'Agent Statuses').click();
 
     }
     
