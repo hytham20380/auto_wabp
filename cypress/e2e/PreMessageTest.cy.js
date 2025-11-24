@@ -15,6 +15,7 @@ describe('Pre Message Page Tests', () => {
 
       // Wait for successful login (adjust the selector to match your app)
       cy.url().should('include', '/pages/dashboard');
+      cy.wait(5000)
     });
 
     // Now visit the category log page after login

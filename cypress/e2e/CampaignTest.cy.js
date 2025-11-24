@@ -12,7 +12,7 @@ describe('Campaign Page Tests Using Fixtures', () => {
     cy.get('@LoginData').then((loginData) => {
       LoginPage.visit();
       LoginPage.login(loginData.admin.email, loginData.admin.password);
-
+      cy.wait(3000)
     });
 
     CampaignPage.visitCampaign();

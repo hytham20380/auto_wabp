@@ -1,8 +1,7 @@
 class AgentsPage {
     visitAgent() {
         //cy.visit('/pages/agents');
-        cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(1) > .subnav-link').click();
-
+        cy.contains('span.nav-link-text' , 'Agents').click();
 
 
 

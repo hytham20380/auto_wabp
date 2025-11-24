@@ -10,8 +10,9 @@ describe('Add New Group', () => {
       LoginPage.visit();
       LoginPage.login(loginData.admin.email, loginData.admin.password);
       cy.url().should('include', '/pages/dashboard');
-    
+      
     });
+    
    GroupPage.visit();
    cy.url().should('include', '/pages/groups/index');
     
@@ -279,7 +280,7 @@ it('Search In Group Page By Custom Group Name', function () {
     });
   });
 
-it.only('Upload File in Custom Group', function () {
+it('Upload File in Custom Group', function () {
     cy.get('@GroupData').then((GroupData) => {
       GroupPage.Clickonfilebutton();
       GroupPage.Clickonaddfilebutton();
@@ -291,7 +292,7 @@ it.only('Upload File in Custom Group', function () {
     });
   });
 
-it.only('Export the Excel file for custom group', () => {
+it('Export the Excel file for custom group', () => {
     // Click the Export to Excel button
     GroupPage.clickEdit();
     GroupPage.ExportGroup();

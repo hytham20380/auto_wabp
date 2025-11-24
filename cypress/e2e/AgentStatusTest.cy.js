@@ -14,7 +14,8 @@ describe('Agents Status Page Tests Using Fixtures', () => {
       LoginPage.login(loginData.admin.email, loginData.admin.password);
 
       // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
+      cy.url().should('include', 'pages');
+      cy.wait(3000)
     });
 
 

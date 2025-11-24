@@ -15,6 +15,7 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
 
       // Wait for successful login (adjust the selector to match your app)
       cy.url().should('not.include', '/auth/login');
+      cy.wait(3000);
     });
 
     ClientsChatReport.VisitClientsChatReport()

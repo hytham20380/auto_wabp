@@ -4,7 +4,9 @@ class LoginPage {
         cy.visit('/auth/login')
     }
     login(email, password) {
-        cy.login(email, password)
+        cy.login(email, password).click().wait(5000);
+        
+        
 
     }
     LoginWithEmptydata(email, password) {

@@ -1,5 +1,5 @@
 import LoginPage from '../Pages/LoginPage';
-import SmsCampaignPage from '../pages/SmsCampaignPage';
+import SmsCampaignPage from '../Pages/SmsCampaignPage';
 
 describe('Sms Campaign tests', () => {
   beforeEach(function () {
