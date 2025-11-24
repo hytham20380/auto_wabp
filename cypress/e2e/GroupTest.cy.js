@@ -10,7 +10,7 @@ describe('Add New Group', () => {
       LoginPage.visit();
       LoginPage.login(loginData.admin.email, loginData.admin.password);
       cy.url().should('include', '/pages/dashboard');
-      cy.wait(5000)
+      
     });
     
    GroupPage.visit();

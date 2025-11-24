@@ -5,8 +5,7 @@ class CampaignPage {
   visitCampaign() {
     //cy.visit('pages/campaigns')
     //cy.contains('span.nav-link-text').contains('Campaigns').click()
-    cy.get('#cdk-accordion-child-4 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(1) > .subnav-link').click()
-
+       cy.contains('span.nav-link-text' , 'Campaigns').click();
   }
   AddNewCampaignInfoTab(CampaignName,ChannelName) {
     cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();

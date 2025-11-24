@@ -2,7 +2,7 @@ class PreMessagePage {
   visit() {
 
     //cy.visit ('/preMessages/index');
-    cy.get('#cdk-accordion-child-1 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(3) > .subnav-link > .nav-link-text').click();
+    cy.contains('span.nav-link-text' , 'Pre-Messages').click();
 
   }
   getSearchInput() {
