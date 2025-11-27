@@ -1,6 +1,7 @@
 import 'cypress-file-upload';
+import BasePage from './BasePage';
 
-class CampaignPage {
+class CampaignPage extends BasePage{
 
   visitCampaign() {
     //cy.visit('pages/campaigns')
@@ -8,8 +9,7 @@ class CampaignPage {
        cy.contains('span.nav-link-text' , 'Campaigns').click();
   }
   AddNewCampaignInfoTab(CampaignName,ChannelName) {
-    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
-
+    this.clickCreate();
     cy.get('span').contains('Select Channel').click();
     cy.contains('li',ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
@@ -22,7 +22,7 @@ class CampaignPage {
   ContactsTab(Mobilenumber) {
 
     cy.get('#phone').type(Mobilenumber);
-    cy.get('span').contains('Add').click();
+    this.clickAddNew();
     cy.get('button').contains('Next').click({ force: true });
 
   }
@@ -51,11 +51,11 @@ class CampaignPage {
     //cy.get('#cdk-step-label-0-2').click();
     //cy.get('#cdk-step-label-0-3').click();
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
+    this.clickSave();
 
   }
   customGroupCamp(CampaignName, TemplateName,ChannelName) {
-    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
+    this.clickCreate();
 
     cy.get('span').contains('Select Channel').click();
     cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
@@ -84,7 +84,7 @@ class CampaignPage {
   }
 
   ScheduleCampaignInfoTab(CampaignName,ChannelName) {
-    cy.get('span').contains('Create New Campaign').click();
+    this.clickCreate();
     cy.get('span').contains('Select Channel').click();
     cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
@@ -145,40 +145,30 @@ class CampaignPage {
 
   SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
-    cy.contains('button', 'Search').click();
-
+    this.clickSearch();
   }
 
   SearchBySendingStatus() {
     cy.get('#mat-select-value-1').click();
     cy.get('.mat-option-text').contains('Sent').click();
 
-    cy.contains('button', 'Search').click();
+    this.clickSearch();
   }
 
   SearchByOnspotCmapaign() {
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Onspot').click();
-    cy.contains('button', 'Search').click();
+    this.clickSearch();
   }
 
   SearchByScheduledCmapaign() {
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Scheduled').click();
-    cy.contains('button', 'Search').click();
+    this.clickSearch();
   }
 
   openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper > .btn-black').click();
-
-        // Wait for the panel to become visible after clicking
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
-      }
-    });
+    super.openSearch();
   }
 
   DuplicateWithoutChanging() {
@@ -213,8 +203,7 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+    this.clickSave();
 
   }
 
@@ -287,8 +276,7 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+    this.clickSave();
 
   }
 
@@ -328,8 +316,7 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+    this.clickSave();
 
   }
 
@@ -372,8 +359,7 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+    this.clickSave();
 
   }
 
@@ -415,8 +401,7 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+   this.clickSave();
 
   }
 
@@ -479,16 +464,10 @@ class CampaignPage {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
-
+   this.clickSave();
 
 
   }
-
-
-
-
-
 
 
 

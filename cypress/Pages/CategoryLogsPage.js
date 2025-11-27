@@ -1,19 +1,14 @@
-class CategoryLogsPage {
+import BasePage from "./BasePage";
+
+class CategoryLogsPage extends BasePage {
   visit() {
     cy.get('span.nav-link-text').contains('Log Category Type').click();
   }            
 
 openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-        const isVisible = $wrapper.css('opacity') === '1';
-        if (!isVisible) {
-            cy.get('.card-head-btns-wrapper > .btn-black').click();
-            // Wait for the panel to become visible after clicking
-            cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-              .should('have.css', 'opacity', '1');
-        }
-    });
-}
+    super.openSearch();
+  }
+
 
   getSearchInput() {
     return cy.get('input[formcontrolname="categoryLogName"]');
@@ -24,11 +19,11 @@ openSearch() {
   }
 
   clickSearch() {
-    cy.contains('button', 'Search', { matchCase: false }).click();
+    super.clickSearch();
   }
 
   clickClear() {
-    cy.contains('button', 'Clear', { matchCase: false }).click();
+    super.clickClear();
   }
 
   getSearchResults() {
@@ -36,7 +31,7 @@ openSearch() {
   }
 
   clickAdd() {
-    cy.contains('button', 'Add', { matchCase: false }).click();
+    super.clickAddNew();
   }
 
   fillCategoryName(name) {
@@ -47,23 +42,23 @@ openSearch() {
   }
 
   clickSave() {
-    cy.contains('button', 'Save', { matchCase: false }).click();
+    super.clickSave();
   }
 
   clickEditFirst() {
     cy.get('table tbody tr').first().within(() => {
-      cy.contains('button', 'Edit').click(); // Adjust if icon button
+      super.clickEdit() // Adjust if icon button
     });
   }
 
   clickDeleteFirst() {
     cy.get('table tbody tr').first().within(() => {
-      cy.contains('button', 'Delete').click(); // Adjust if icon
+      super.clickDelete(); // Adjust if icon
     });
   }
 
   confirmDelete() {
-    cy.get('.mat-dialog-actions > .btn-black').click()
+    super.confirmDialog();
   }
 }
 
