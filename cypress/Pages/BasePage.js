@@ -1,3 +1,5 @@
+import LoginPage from "../Pages/LoginPage";
+
 class BasePage {
 
   elements = {
@@ -7,7 +9,7 @@ class BasePage {
     deleteBtn: () => cy.contains('span', 'Delete').first(),
     addNewBtn: () => cy.contains('span', 'Add'),
     createBtn: () => cy.contains('span', 'Create'),
-    saveBtn : () => cy.contains('span' , 'Save'),
+    saveBtn: () => cy.contains('span', 'Save'),
     exportBtn: () => cy.get('button[title="Export To Excel"]'),
   };
 
@@ -55,9 +57,40 @@ class BasePage {
   }
 
   confirmDialog() {
-    cy.get('#mat-dialog-0').should('be.visible');
+
+    cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
     cy.get('.mat-dialog-actions > .btn-black').click();
   }
+
+  static init(PageName, fixtureName) {
+
+    beforeEach(function () {
+
+      // Load login data & perform login
+      cy.fixture('LoginData').then((loginData) => {
+
+        LoginPage.visit();
+        LoginPage.login(loginData.admin.email, loginData.admin.password);
+
+        // Confirm login succeeded
+        cy.url().should('not.include', '/auth/login');
+      })
+
+        // After login → Navigate to the target page
+        .then(() => {
+          return PageName.visit();
+        })
+
+        // Then load test data fixture
+        .then(() => {
+          return cy.fixture(fixtureName).then((data) => {
+            this[fixtureName] = data;   // Attach data to test context
+          });
+        });
+
+    });
+  }
+
 }
 
 export default BasePage;

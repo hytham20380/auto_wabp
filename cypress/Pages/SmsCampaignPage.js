@@ -1,7 +1,7 @@
 class SmsCampaignPage {
 
 
-    visitSmsCampaign() {
+    visit() {
 
     cy.contains('span.nav-link-text', 'SMS Campaigns').click();
 

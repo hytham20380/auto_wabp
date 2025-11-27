@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 
 class AgentsPage extends BasePage {
 
-  visitAgent() {
+  visit() {
     cy.contains('span.nav-link-text', 'Agents').click();
   }
 

@@ -1,8 +1,9 @@
 import TermsRolesPage from "../Pages/Terms&RolesPage";
-import LoginPage from '../Pages/LoginPage';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Terms&Roles Tests Using Fixtures', () => {
-
+/*
 beforeEach(function () {
     // Load fixtures first
     cy.fixture('LoginData').as('LoginData');
@@ -22,7 +23,8 @@ TermsRolesPage.visitRole();
 });
 
   });
-
+*/
+  BasePage.init(TermsRolesPage, 'TermsRolesData');
 
 it('Should add a new Role successfully', function () {
   // Generate random suffix between 100–999

@@ -1,27 +1,10 @@
-import LoginPage from '../Pages/LoginPage';
 import CampaignPage from '../Pages/CampaignPage';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Campaign Page Tests Using Fixtures', () => {
 
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-      cy.wait(3000)
-    });
-
-    CampaignPage.visitCampaign();
-
-    cy.fixture('CampaignData').then((data) => {
-      cy.wrap(data).as('CampaignData'); // 🔹 Store fixture data globally
-    });
-  });
-
+  BasePage.init(CampaignPage, 'CampaignData');
 
   it('Should create Onspot campaigns Successfully', function () {
 

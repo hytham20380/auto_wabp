@@ -1,31 +1,9 @@
-import LoginPage from '../Pages/LoginPage';
+import BasePage from '../Pages/BasePage';
 import ClientFollowUpPage from '../Pages/ClientFollowUpPage';
 
 describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
-    beforeEach(function () {
-        // Load fixtures first
-        cy.fixture('LoginData').as('LoginData');
-
-
-        // Perform login and wait for successful navigation
-        cy.get('@LoginData').then((loginData) => {
-            LoginPage.visit();
-            LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-            // Wait for successful login (adjust the selector to match your app)
-            cy.url().should('not.include', '/auth/login');
-        });
-
-
-        ClientFollowUpPage.visitClientFollowUp();
-        cy.url().should('include', '/pages/clientFollowUps'); // ✅ expected path
-        cy.fixture('ClientFollowUpData').then((data) => {
-            cy.wrap(data).as('ClientFollowUpData'); // 🔹 Store fixture data globally
-        });
-
-    });
-
+    BasePage.init(ClientFollowUpPage,'ClientFollowUpData')
     it('Should Sent Message Successfully With Valid Data ', function () {
         const randomMobile = this.ClientFollowUpData.MobileNumber[
             Math.floor(Math.random() * this.ClientFollowUpData.MobileNumber.length)
@@ -55,7 +33,7 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     })
     it('Should return the related data when search by valid mobile number  ', function () {
-        //ClientFollowUpPage.openSearch()
+        
         ClientFollowUpPage.SerchByMobileNum(this.ClientFollowUpData.SearchNum)
         cy.get('tbody > :nth-child(1) > .cdk-column-mobileNumber').should('contain', this.ClientFollowUpData.SearchNum);
 

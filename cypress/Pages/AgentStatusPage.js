@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 
 class AgentStatus extends BasePage {
 
-  VisitAgentStatus() {
+  visit() {
     cy.contains('span', 'Agent Statuses').click();
   }
 
@@ -71,6 +71,8 @@ class AgentStatus extends BasePage {
   SetInActiveStatus() {
     cy.get('.agent-status-button-inner').click();
     cy.contains('button[mat-menu-item]', 'Auto Offline').click();
+    this.confirmDialog();
+
   }
 
   // ----------------- Delete -----------------

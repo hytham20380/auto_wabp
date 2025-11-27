@@ -1,8 +1,12 @@
 import LoginPage from '../Pages/LoginPage';
 import PreMessagePage from '../Pages/PreMessagePage';
+import BasePage from '../Pages/BasePage';
+
 
 
 describe('Pre Message Page Tests', () => {
+
+  /*
   beforeEach(function () {
     // Load fixtures first
     cy.fixture('LoginData').as('LoginData');
@@ -21,33 +25,34 @@ describe('Pre Message Page Tests', () => {
     // Now visit the category log page after login
     PreMessagePage.visit();
   });
-
+*/
+  BasePage.init(PreMessagePage, 'PreMessageData');
 
   it('Should add a new Message ', function () {
     PreMessagePage.clickAdd();
-    PreMessagePage.fillnewMessage(this.data.newMessage.Message);
+    PreMessagePage.fillnewMessage(this.PreMessageData.newMessage.Message);
     PreMessagePage.clickSave();
-    PreMessagePage.getSearchResults().should('contain', this.data.newMessage.Message);
+    PreMessagePage.getSearchResults().should('contain', this.PreMessageData.newMessage.Message);
   });
 
   it('Should edit the first Message', function () {
     PreMessagePage.clickEditFirst();
-    PreMessagePage.fillnewMessage(this.data.editedMessage.Message);
+    PreMessagePage.fillnewMessage(this.PreMessageData.editedMessage.Message);
     PreMessagePage.clickSave();
-    PreMessagePage.getSearchResults().should('contain', this.data.editedMessage.Message);
+    PreMessagePage.getSearchResults().should('contain', this.PreMessageData.editedMessage.Message);
   });
 
   it('Should search by Message and display results', function () {
     PreMessagePage.openSearch();
-    PreMessagePage.enterSearchMessage(this.data.editedMessage.Message);
+    PreMessagePage.enterSearchMessage(this.PreMessageData.editedMessage.Message);
     PreMessagePage.clickSearch();
-    PreMessagePage.getSearchResults().should('contain.text', this.data.editedMessage.Message);
+    PreMessagePage.getSearchResults().should('contain.text', this.PreMessageData.editedMessage.Message);
 
   });
 
   it('Should clear the search field', function () {
     PreMessagePage.openSearch();
-    PreMessagePage.enterSearchMessage(this.data.searchMessage);
+    PreMessagePage.enterSearchMessage(this.PreMessageData.searchMessage);
     PreMessagePage.clickClear();
     PreMessagePage.getSearchInput().should('have.value', '');
   });
