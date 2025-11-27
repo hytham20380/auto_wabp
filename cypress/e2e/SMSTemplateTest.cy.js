@@ -1,32 +1,11 @@
-import LoginPage from '../Pages/LoginPage';
 import SMSTemplate from '../Pages/SMSTemplatePage';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Shpuld Add New SMS Template Successfully  ', () => {
 
-  beforeEach(function () {
+  BasePage.init(SMSTemplate, 'SMSTemplateData');
 
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
-    });
-
-
-    SMSTemplate.visitTemplate();
-    cy.url().should('include', '/pages/smsTemplates'); // ✅ expected path
-    cy.fixture('SMSTemplateData').then((data) => {
-      cy.wrap(data).as('SMSTemplateData'); // 🔹 Store fixture data globally
-    });
-
-  });
-  
   it('Should Add New SMS Template Successfully', function () {
       const campaignsNeeded = 1;
       // to ensure the number is not repeated

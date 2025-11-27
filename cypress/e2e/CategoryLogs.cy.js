@@ -1,43 +1,44 @@
-import LoginPage from '../Pages/LoginPage';
 import CategoryLogsPage from '../Pages/CategoryLogsPage';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Category Logs Page Tests', () => {
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-    cy.fixture('categoryLogsData').as('data');
 
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
-    });
-
-    // Now visit the category log page after login
-    CategoryLogsPage.visit();
-  });
-
+  BasePage.init(CategoryLogsPage, 'categoryLogsData');
 
   it('1️⃣ Should add a new category log', function () {
+        const CategoryLogNeeded = 1;
+
+    const usedSuffixes = new Set();
+
+
+    while (usedSuffixes.size < CategoryLogNeeded) {
+      
+      const randomSuffix = Cypress._.random(100, 999);
+
+      // the loop is stopped if the random number is repeated 
+      if (usedSuffixes.has(randomSuffix)) continue;
+      usedSuffixes.add(randomSuffix);
+      const CategoryLogBase = this.categoryLogsData.newCategory.name
+      const dynamiCategoryLog = `${CategoryLogBase} ${randomSuffix}`;
+    
     CategoryLogsPage.clickAdd();
-    CategoryLogsPage.fillCategoryName(this.data.newCategory.name);
+    CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
     CategoryLogsPage.clickSave();
-    CategoryLogsPage.getSearchResults().should('contain', this.data.newCategory.name);
+    CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.newCategory.name);
+    }
   });
 
   it('2️⃣ Should search by name and display results', function () {
     CategoryLogsPage.openSearch();
-    CategoryLogsPage.enterSearchName(this.data.searchName);
+    CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickSearch();
-    CategoryLogsPage.getSearchResults().should('contain', this.data.searchName);
+    CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.searchName);
   });
 
   it('3️⃣ Should clear the search field', function () {
     CategoryLogsPage.openSearch();
-    CategoryLogsPage.enterSearchName(this.data.searchName);
+    CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickClear();
     CategoryLogsPage.getSearchInput().should('have.value', '');
   });
@@ -45,9 +46,9 @@ describe('Category Logs Page Tests', () => {
   it('4️⃣ Should edit the first category log', function () {
     CategoryLogsPage.clickEditFirst();
 
-    CategoryLogsPage.fillCategoryName(this.data.editedCategory.name);
+    CategoryLogsPage.fillCategoryName(this.categoryLogsData.editedCategory.name);
     CategoryLogsPage.clickSave();
-    CategoryLogsPage.getSearchResults().should('contain', this.data.editedCategory.name);
+    CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.editedCategory.name);
   });
 
   it('5️⃣ Should delete the first category log', () => {

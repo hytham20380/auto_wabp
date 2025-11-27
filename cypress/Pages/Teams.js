@@ -1,6 +1,6 @@
 class TeamsPage {
   visit() {
-    cy.get(':nth-child(6) > .subnav-link').click();
+    cy.contains('span.nav-link-text', 'Teams').click();
   }
 
   enterName(name) {
@@ -35,7 +35,7 @@ class TeamsPage {
   }
 
   clickEdit() {
-    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c253-2').first().click();
+    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c255-37').first().click();
   }
 
   clickSave() {

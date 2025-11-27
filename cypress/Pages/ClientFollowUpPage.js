@@ -1,6 +1,6 @@
 class ClientFollowUp {
 
-    visitClientFollowUp() {
+    visit() {
         cy.contains('a', 'Client Follow-Ups').click()
 
     }

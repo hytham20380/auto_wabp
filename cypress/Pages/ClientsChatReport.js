@@ -1,5 +1,5 @@
 class ClientsChatReport {
-    VisitClientsChatReport() {
+    visit() {
         //cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/report/clientsChat');
         cy.contains('span.nav-link-text' , 'Clients Chat').click();
         
