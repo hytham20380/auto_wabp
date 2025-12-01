@@ -38,7 +38,11 @@ class BasePage {
   }
 
   clickSave() {
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
+    this.elements.saveBtn().click();
+  }
+
+  clickExport() {
+    this.elements.exportBtn().click();
   }
 
   clickExport() {

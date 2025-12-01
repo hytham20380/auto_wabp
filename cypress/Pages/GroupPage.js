@@ -1,4 +1,7 @@
-class GroupPage {
+import BasePage from "./BasePage";
+
+
+class GroupPage extends BasePage {
 
   // -------- Navigation --------
   visit() {
@@ -7,22 +10,22 @@ class GroupPage {
 
   // -------- Buttons --------
   clickAdd() {
-    cy.contains('button', 'Add Group').click();
+    super.clickAddNew();
   }
 
 
   clickAddcontacts() {
-    cy.get('button:contains("Add")').click();
-
+    super.clickAddNew();
 
   }
 
   clickSave() {
-    cy.contains('button', 'Save', { matchCase: false }).click();
+    super.clickSave();
+
   }
 
   clickEdit() {
-    cy.contains('button', 'Edit').click();
+    super.clickEdit();
 
 
   }
@@ -32,21 +35,14 @@ class GroupPage {
   }
 
   ClickOnSearchButtonOnGroupPage() {
-    cy.get('.btn-search-actions-wrapper > .btn-black').click();
+    super.clickSearch();
   }
 
 
 
   openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper > .btn-black').click();
-        // Wait for the panel to become visible after clicking
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
-      }
-    });
+    super.openSearch();
+
   }
 
   addGroupName(groupName) {
@@ -106,16 +102,16 @@ class GroupPage {
   }
 
   clickSearchincontactslist() {
-    cy.get('.btn-search-actions-wrapper > .btn-black').click();
+    super.clickSearch();
 
   }
 
   getSearchResults() {
-    return cy.get('table'); // You can refine this if you have rows or columns
+    return cy.get('table'); // You can refine super if you have rows or columns
   }
 
   clickClearingroupcontactslist() {
-    cy.get('.btn-transparent').click();
+    super.clickClear();
   }
 
 
@@ -124,11 +120,11 @@ class GroupPage {
   }
 
   deleteContactsfromList() {
-    cy.contains('button span', 'Delete').click();
+    super.clickDelete();
   }
 
   ConfirmdeleteContactsfromList() {
-    cy.get('button.btn.btn-black').contains('Delete').click();
+    super.confirmDialog();
   }
 
   Clickonfilebutton() {
@@ -136,24 +132,27 @@ class GroupPage {
   }
 
   Clickonaddfilebutton() {
-    cy.get('.card-head-btns-wrapper > .btn').click();
+    super.clickAddNew();
   }
 
   Clickonsavebuttonforuploadfile() {
-    cy.get('.mat-dialog-actions > .btn-black').click();
+    super.clickSave();
   }
 
   ExportGroup() {
-    cy.get('button[title="Export To Excel"]').click()
+    super.clickExport();
+
 
   }
 
   ClickSearchButtonInFilePege() {
-    cy.get('.btn-search-actions-wrapper > .btn-black').click();
+    super.clickSearch();
+
   }
 
   ClickClearButtonInFilePege() {
-    cy.get('.btn-transparent').click();
+    super.clickClear();
+
 
   }
 
@@ -162,38 +161,30 @@ class GroupPage {
   }
 
   ClickOnExportContactsButton() {
-    cy.get('button[title="Export To Excel"]').click();
+    super.clickExport();
 
   }
 
   ClickOnDeleteGroupButton() {
-    cy.contains('button', 'Delete').click();
+    super.clickDelete();
+
 
 
   }
   ClickOnConfirmDeleteGroupButton() {
-    cy.get('.mat-dialog-actions > .btn-black').click();
+    super.confirmDialog();
   }
 
-  openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper > .btn-black').click();
-        // Wait for the panel to become visible after clicking
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
-      }
-    });
 
-  }
+
+
 
   EnterGroupName(updateName) {
     cy.get('input[formcontrolname="groupName"]').clear().type(updateName);
   }
 
   ClickOnSearchButtonOnGroupPage() {
-    cy.get('.btn-search-actions-wrapper > .btn-black').click();
+    super.clickSearch();
   }
 
   getSearchInput() {

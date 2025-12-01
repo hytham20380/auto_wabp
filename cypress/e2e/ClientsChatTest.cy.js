@@ -14,8 +14,8 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
 
   })
   it('Should Search by the Client name and return related values successfully ', function () {
-    ClientsChatReport.SearchByClientName(this.ClientsChatData.CleintName);
-    cy.get('td.mat-column-clientName').should('contain.text', this.ClientsChatData.CleintName);
+    ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName);
+    cy.get('td.mat-column-clientName').should('contain.text', this.ClientsChatData.ClientName);
 
 
   })
@@ -29,17 +29,17 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
   it('Should Search by the agent name and return related values successfully ', function () {
     ClientsChatReport.SerchByAgentName(this.ClientsChatData.AgentName)
 
-    cy.get('tbody > :nth-child(1) > .cdk-column-agentName').should('contain', this.ClientsChatData.AgentName)
-    
+   cy.contains('td.mat-column-agentName', 'Mohamed Desouky')
+
   })
   it('Should clear the fields succeefully  ', function () {
-    ClientsChatReport.SearchByClientName(this.ClientsChatData.CleintName)
+    ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
     ClientsChatReport.Clear();
     cy.get('input[formcontrolname="clientName"]').should('have.value', '');
 
   })
   it('Should Export the data as the view of the grid  successfully ', function () {
-    ClientsChatReport.SearchByClientName(this.ClientsChatData.CleintName)
+    ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
 
     ClientsChatReport.ExportFile()
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');

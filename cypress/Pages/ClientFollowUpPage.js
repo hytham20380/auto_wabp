@@ -1,4 +1,7 @@
-class ClientFollowUp {
+import BasePage from "./BasePage";
+
+
+class ClientFollowUp extends BasePage {
 
     visit() {
         cy.contains('a', 'Client Follow-Ups').click()
@@ -17,29 +20,16 @@ class ClientFollowUp {
 
     }
     openSearch() {
-        cy.get('div.search-form-expand-wrapper').then($wrapper => {
-            const isVisible = $wrapper.css('opacity') === '1';
-            if (!isVisible) {
-                cy.get('.card-head-btns-wrapper > .btn-black').click();
-
-                // Wait for the panel to become visible after clicking
-                cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-                    .should('have.css', 'opacity', '1');
-            }
-        });
+        this.openSearch();
     }
 
     SerchByMobileNum(MobileNumber) {
         cy.get('#phone').type(MobileNumber);
-        cy.contains('span', 'Search').click();
-
-
+        this.clickSearch();    
     }
+     
     Clear() {
-
-
-        cy.get('.btn-transparent').click()
-        cy.get('span').contains('Clear').click()
+         this.clickClear();
 
     }
 
@@ -62,13 +52,8 @@ class ClientFollowUp {
 
     }
     Export() {
-        cy.get('button[title="Export To Excel"]').click()
-
+        this.clickExport();
     }
-
-
-
-
 
 
 }
