@@ -71,7 +71,7 @@ class AgentStatus extends BasePage {
   SetInActiveStatus() {
     cy.get('.agent-status-button-inner').click();
     cy.contains('button[mat-menu-item]', 'Auto Offline').click();
-    this.confirmDialog();
+    //this.confirmDialog();
 
   }
 

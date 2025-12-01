@@ -121,7 +121,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
   it('Should set an Offliine Status', function(){
     AgentStatus.SetInActiveStatus()
   })
-  it.only ('Delete Status That set before and not allowed to delete ', function(){
+  it ('Delete Status That set before and not allowed to delete ', function(){
     AgentStatus.SetInActiveStatus()
     AgentStatus.openSearch()
     AgentStatus.SerchByName(this.AgentStatusData.InActiveStatus)
@@ -134,7 +134,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
   })
 
-  it.only ('Delete Status Successfully ', function(){
+  it ('Delete Status Successfully ', function(){
     AgentStatus.SetInActiveStatus()
     AgentStatus.openSearch()
     AgentStatus.SerchByName(this.AgentStatusData.RandomStatus)
