@@ -94,7 +94,65 @@ class BasePage {
 
     });
   }
+  static generateCampaignData(fixtureData) {
+    const base = fixtureData.campaigns[0];
+
+    const randomSuffix = Cypress._.random(100, 999);
+
+    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
+    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
+    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
+
+    const randomTemplate = Cypress._.sample(fixtureData.templateNames);
+
+    return {
+      randomSuffix,
+      dynamicCampaignName,
+      dynamicScheduleName,
+      dynamicMobileNumber,
+      randomTemplate
+    };
+
+  }
+
+  static generateDynamicName(baseName) {
+    // توليد random number بين 100 و 999
+    const randomSuffix = Cypress._.random(100, 999);
+
+    // اسم ديناميكي
+    const dynamicName = `${baseName} ${randomSuffix}`;
+
+    return dynamicName;
+  }
+
+  static generateSMSCampaignData(fixtureData) {
+    // اختار أول campaign من smsCampaigns
+    const base = fixtureData.smsCampaigns[0];
+
+    // توليد رقم عشوائي بين 100 و 999
+    const randomSuffix = Cypress._.random(100, 999);
+
+    // بناء الأسماء الديناميكية
+    const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
+    const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
+    const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
+
+    // اختيار template عشوائي
+    const randomTemplate = Cypress._.sample(fixtureData.templateNames);
+
+    return {
+      randomSuffix,
+      dynamicCampaignName,
+      dynamicScheduleName,
+      dynamicMobileNumber,
+      randomTemplate,
+    }
+  }
 
 }
+
+
+
+
 
 export default BasePage;

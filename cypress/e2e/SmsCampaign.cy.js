@@ -11,102 +11,61 @@ describe('Sms Campaign tests', () => {
     cy.log('Already logged in and on SMS Campaign page');
   });
 
-  //Note: TO run all templates language you should run the creation script 5 times.
   it('Should create Onspot campaigns Successfully', function () {
-    const campaignsNeeded = 1;
-    const usedSuffixes = new Set();
+
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
 
-    while (usedSuffixes.size < campaignsNeeded) {
-      const randomSuffix = Cypress._.random(100, 999);
-      if (usedSuffixes.has(randomSuffix)) continue;
-      usedSuffixes.add(randomSuffix);
+    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.dynamicCampaignName);
+    SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
+    SmsCampaignPage.TemplateTab(data.randomTemplate);
 
-      const campaignBase = this.SmsCampaign.smsCampaigns[0];
-      const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
-      const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
+    cy.wait(3000);
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully');
 
-      const randomTemplate = Cypress._.sample(this.SmsCampaign.templateNames);
-
-      SmsCampaignPage.AddNewSmsCampaignInfoTab(dynamicCampaignName);
-      SmsCampaignPage.ContactsTab(dynamicMobileNumber);
-      SmsCampaignPage.TemplateTab(randomTemplate);
-
-      cy.wait(3000);
-      cy.get('.mat-simple-snack-bar-content')
-        .should('contain', 'Campaign Created Successfully');
-    }
 
   });
 
   it('Should create Onspot campaigns with custom group Successfully', function () {
 
-    const campaignsNeeded = 1;
-    const usedSuffixes = new Set();
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
 
-    while (usedSuffixes.size < campaignsNeeded) {
-      const randomSuffix = Cypress._.random(100, 999);
-      if (usedSuffixes.has(randomSuffix)) continue;
-      usedSuffixes.add(randomSuffix);
+    SmsCampaignPage.customGroupCamp(data.dynamicCampaignName, this.SmsCampaign.templateNames[1]);
 
-      const campaignBase = this.SmsCampaign.smsCampaigns[0];
-      const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully');
 
-      SmsCampaignPage.customGroupCamp(dynamicCampaignName, this.SmsCampaign.templateNames[1]);
-
-      cy.get('.mat-simple-snack-bar-content')
-        .should('contain', 'Campaign Created Successfully');
-    }
 
   });
 
-  it('Should create Onspot campaigns with Normal group Successfully', function () {
-   
-      const campaignsNeeded = 1;
-      const usedSuffixes = new Set();
+  it.only('Should create Onspot campaigns with Normal group Successfully', function () {
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
-      while (usedSuffixes.size < campaignsNeeded) {
-        const randomSuffix = Cypress._.random(100, 999);
-        if (usedSuffixes.has(randomSuffix)) continue;
-        usedSuffixes.add(randomSuffix);
 
-        const campaignBase = this.SmsCampaign.NormalSchedual;
-        const dynamicCampaignName = `${campaignBase} ${randomSuffix}`;
 
-        // استدعاء مباشر من object المستورد
-        SmsCampaignPage.normalGroupCamp(dynamicCampaignName, this.SmsCampaign.templateNames[1]);
+    SmsCampaignPage.normalGroupCamp(data.dynamicCampaignName, this.SmsCampaign.templateNames[1]);
 
-        cy.get('.mat-simple-snack-bar-content', { timeout: 10000 }).should('contain', 'Campaign Created Successfully');
+    cy.get('.mat-simple-snack-bar-content', { timeout: 10000 }).should('contain', 'Campaign Created Successfully');
 
-      }
-    
+
+
   });
 
   it('Should create Scheduled campaigns Successfully', function () {
 
-    const campaignsNeeded = 1;
-    const usedSuffixes = new Set();
+  const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
-    while (usedSuffixes.size < campaignsNeeded) {
-      const randomSuffix = Cypress._.random(100, 999);
-      if (usedSuffixes.has(randomSuffix)) continue;
-      usedSuffixes.add(randomSuffix);
-
-      const campaignBase = this.SmsCampaign.smsCampaigns[0];
-      const dynamicMobileNumber = `${campaignBase.BaseMobileNumber}${randomSuffix}`;
-      const dynamicCampaignName = `${campaignBase.CampaignName} ${randomSuffix}`;
-
-      const randomTemplate = Cypress._.sample(this.SmsCampaign.templateNames);
-
-      SmsCampaignPage.ScheduleCampaignInfoTab(dynamicCampaignName);
-      SmsCampaignPage.ContactsTab(dynamicMobileNumber);
-      SmsCampaignPage.TemplateTab(randomTemplate);
+      SmsCampaignPage.ScheduleCampaignInfoTab(data.dynamicCampaignName);
+      SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
+      SmsCampaignPage.TemplateTab(data.randomTemplate);
 
       cy.wait(3000);
       cy.get('.mat-simple-snack-bar-content')
         .should('contain', 'Campaign Created Successfully');
-    }
+   
+
 
 
   });
@@ -218,7 +177,7 @@ describe('Sms Campaign tests', () => {
 
 
   });
-  it.only('View Button Should work correctly', function () {
+  it('View Button Should work correctly', function () {
     cy.log('Already logged in and on SMS Campaign page');
     cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(1) > .btn > .ng-tns-c263-37').click();
     cy.url().should('include', '/pages/smsCampaigns/report');
