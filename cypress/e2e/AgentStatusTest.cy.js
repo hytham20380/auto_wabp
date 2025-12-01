@@ -1,31 +1,10 @@
-import LoginPage from '../Pages/LoginPage';
 import AgentStatus from '../Pages/AgentStatusPage';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Agents Status Page Tests Using Fixtures', () => {
 
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('include', 'pages');
-      cy.wait(3000)
-    });
-
-
-    AgentStatus.VisitAgentStatus()
-    cy.url().should('include', '/pages/AdminStatuses'); // ✅ expected path
-    cy.fixture('AgentStatusData').then((data) => {
-      cy.wrap(data).as('AgentStatusData'); // 🔹 Store fixture data globally
-    });
-
-  });
+  BasePage.init(AgentStatus, 'AgentStatusData');
 
   it('Should Add New Active Status Successfully ', function(){
     const StausNeeded = 1;

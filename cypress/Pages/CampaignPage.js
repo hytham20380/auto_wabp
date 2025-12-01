@@ -3,7 +3,7 @@ import BasePage from './BasePage';
 
 class CampaignPage extends BasePage{
 
-  visitCampaign() {
+  visit() {
     //cy.visit('pages/campaigns')
     //cy.contains('span.nav-link-text').contains('Campaigns').click()
        cy.contains('span.nav-link-text' , 'Campaigns').click();

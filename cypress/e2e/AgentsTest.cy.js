@@ -1,33 +1,9 @@
-import LoginPage from '../Pages/LoginPage';
 import AgentsPage from '../Pages/AgentsPage';
+import BasePage from '../Pages/BasePage';
 
 describe('Agents Page Tests Using Fixtures', () => {
 
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
-      cy.wait(3000)
-    });
-
-
-    AgentsPage.visitAgent();
-    cy.url().should('include', '/pages/agents'); // ✅ expected path
-    cy.fixture('AgentsData').then((data) => {
-      cy.wrap(data).as('AgentsData'); // 🔹 Store fixture data globally
-    });
-
-  });
-
-
+  BasePage.init(AgentsPage, 'AgentsData');
 
   it('Should add a new agent successfully', function () {
   // Generate random suffix between 100–999

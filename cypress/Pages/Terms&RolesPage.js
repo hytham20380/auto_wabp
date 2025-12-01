@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 
 
 class RolesPage extends BasePage {
-    visitRole() {
+    visit() {
         // cy.visit('/pages/roles')
         cy.contains('span.nav-link-text' , 'Terms & Roles').click();
     }

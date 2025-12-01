@@ -2,8 +2,8 @@ import BasePage from "./BasePage";
 
 class SMSTemplate extends BasePage {
 
-    visitTemplate() {
-        cy.get('#cdk-accordion-child-5 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(1) > .subnav-link').click();
+    visit() {
+        cy.contains('span.nav-link-text', 'SMS Templates').click();
     }
 
     AddNewTemplate(Name, Body) {

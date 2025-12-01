@@ -1,30 +1,11 @@
-import LoginPage from '../Pages/LoginPage';
 import ClientsChatReport from '../Pages/ClientsChatReport';
+import BasePage from '../Pages/BasePage';
+
 
 describe('Clients Chat Report Tests Using Fixtures', () => {
 
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
+  BasePage.init(ClientsChatReport, 'ClientsChatData')
 
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('not.include', '/auth/login');
-      cy.wait(3000);
-    });
-
-    ClientsChatReport.VisitClientsChatReport()
-
-    cy.fixture('ClientsChatData').then((data) => {
-      cy.wrap(data).as('ClientsChatData'); // 🔹 Store fixture data globally
-    });
-
-  });
   it('Should Search by the mobile number and return related values successfully ', function () {
     ClientsChatReport.SearchByMobileNumber(this.ClientsChatData.MobileNumber);
     cy.get('td.mat-column-clientMobileNumber').should('contain.text', this.ClientsChatData.MobileNumber);

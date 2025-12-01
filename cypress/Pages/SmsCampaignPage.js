@@ -4,7 +4,7 @@ import BasePage from "./BasePage";
 class SmsCampaignPage extends BasePage {
 
 
-    visitSmsCampaign() {
+    visit() {
 
     cy.contains('span.nav-link-text', 'SMS Campaigns').click();
 

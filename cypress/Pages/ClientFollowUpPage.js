@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 
 class ClientFollowUp extends BasePage {
 
-    visitClientFollowUp() {
+    visit() {
         cy.contains('a', 'Client Follow-Ups').click()
 
     }
