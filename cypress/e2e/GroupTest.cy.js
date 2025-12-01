@@ -1,4 +1,3 @@
-import LoginPage from '../Pages/LoginPage';
 import GroupPage from '../Pages/GroupPage';
 import BasePage from '../Pages/BasePage';
 
