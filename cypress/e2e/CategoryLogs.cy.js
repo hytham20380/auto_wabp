@@ -6,30 +6,15 @@ describe('Category Logs Page Tests', () => {
 
   BasePage.init(CategoryLogsPage, 'categoryLogsData');
 
-  it.only('1️⃣ Should add a new category log', function () {
-    /*
-        const CategoryLogNeeded = 1;
+  it('1️⃣ Should add a new category log', function () {
 
-    const usedSuffixes = new Set();
-
-
-    while (usedSuffixes.size < CategoryLogNeeded) {
-      
-      const randomSuffix = Cypress._.random(100, 999);
-
-      // the loop is stopped if the random number is repeated 
-      if (usedSuffixes.has(randomSuffix)) continue;
-      usedSuffixes.add(randomSuffix);
-      const CategoryLogBase = this.categoryLogsData.newCategory.name
-      const dynamiCategoryLog = `${CategoryLogBase} ${randomSuffix}`;
-    */
-const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
+    const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
 
     CategoryLogsPage.clickAdd();
     CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
     CategoryLogsPage.clickSave();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.newCategory.name);
-    
+
   });
 
   it('2️⃣ Should search by name and display results', function () {

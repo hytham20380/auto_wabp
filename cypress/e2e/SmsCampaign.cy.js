@@ -40,7 +40,7 @@ describe('Sms Campaign tests', () => {
 
   });
 
-  it.only('Should create Onspot campaigns with Normal group Successfully', function () {
+  it('Should create Onspot campaigns with Normal group Successfully', function () {
     const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
 
