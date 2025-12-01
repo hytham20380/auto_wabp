@@ -1,7 +1,7 @@
 import BasePage from "./BasePage";
 
 class ClientsChatReport extends BasePage {
-    VisitClientsChatReport() {
+    visit() {
         cy.contains('span.nav-link-text' , 'Clients Chat').click();
         
     }
@@ -35,10 +35,7 @@ class ClientsChatReport extends BasePage {
         this.clickClear();
 
     }
-    ExportFile() {
-        this.clickExport();
-
-    }
+    
     ViewChat() {
         cy.get('.btn-group-actions-list .btn').first().click();
 

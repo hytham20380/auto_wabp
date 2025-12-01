@@ -93,11 +93,7 @@ class AgentsPage extends BasePage {
   }
 
 
-  // ----------------- Export -----------------
-  ExportAgents() {
-    this.clickExport();
-  }
-
+  
 }
 
 export default new AgentsPage();

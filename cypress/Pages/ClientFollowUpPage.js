@@ -51,10 +51,6 @@ class ClientFollowUp extends BasePage {
 
 
     }
-    Export() {
-        this.clickExport();
-    }
-
 
 }
 export default new ClientFollowUp();

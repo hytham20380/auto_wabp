@@ -40,7 +40,7 @@ describe('Sms Campaign tests', () => {
 
   });
 
-  it.only('Should create Onspot campaigns with Normal group Successfully', function () {
+  it('Should create Onspot campaigns with Normal group Successfully', function () {
     const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
 
@@ -181,6 +181,11 @@ describe('Sms Campaign tests', () => {
     cy.log('Already logged in and on SMS Campaign page');
     cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(1) > .btn > .ng-tns-c263-37').click();
     cy.url().should('include', '/pages/smsCampaigns/report');
+  });
+
+  it('Export Contacts', function () {
+    SmsCampaignPage.ExportSmsCampaign();
+
   });
 
 });

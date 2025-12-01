@@ -530,7 +530,7 @@ DuplicateChangeTemp(TemplateName) {
 
 ExportSmsCampaign() {
   cy.contains('span', 'View').click();     
-  super.clickExport();
+  BasePage.Export();
 }
 
 }

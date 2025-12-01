@@ -6,7 +6,7 @@ describe('Category Logs Page Tests', () => {
 
   BasePage.init(CategoryLogsPage, 'categoryLogsData');
 
-  it.only('1️⃣ Should add a new category log', function () {
+  it('1️⃣ Should add a new category log', function () {
     /*
         const CategoryLogNeeded = 1;
 
