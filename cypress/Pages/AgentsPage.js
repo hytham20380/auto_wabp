@@ -2,45 +2,45 @@ import BasePage from "./BasePage";
 
 class AgentsPage extends BasePage {
 
+  // ----------------- Navigation -----------------
   visit() {
     cy.contains('span.nav-link-text', 'Agents').click();
   }
 
   // ----------------- Add New Agent -----------------
   AddNewAgent(FullName, email, integrationId = '') {
-// Click "Add New Agent"
-cy.get('button.btn.btn-primary').click();
 
-// Fill Full Name and Email
-cy.get('input[data-placeholder="Full Name"]').type(FullName);
-cy.get('input[formcontrolname="email"]').type(email);
+    // Use BasePage Encapsulated Action
+    this.clickAddNew();
 
-// Select Role (first role)
-cy.contains('Select Role').click();
-cy.get('#roleDD label').first().click();
+    // Fill Full Name and Email
+    cy.get('input[data-placeholder="Full Name"]').type(FullName);
+    cy.get('input[formcontrolname="email"]').type(email);
 
-// Optional Integration ID
-cy.get('body').then($body => {
-if ($body.find('input[formcontrolname="integrationId"]').length > 0) {
-cy.get('input[formcontrolname="integrationId"]', { timeout: 10000 })
-.should('be.visible')
-.then($input => {
-if (!$input.val()) {  // Type only if empty
-cy.wrap($input).type(integrationId, { force: true });
-}
-});
-} else {
-cy.log('Integration ID field not present, skipping typing.');
-}
-});
+    // Select Role (first role)
+    cy.contains('Select Role').click();
+    cy.get('#roleDD label').first().click();
 
-// Select Team (first team)
-cy.contains('Select Team').click();
-cy.get('#teamDD label').first().click();
+    // Optional Integration ID
+    cy.get('body').then($body => {
+      if ($body.find('input[formcontrolname="integrationId"]').length > 0) {
+        cy.get('input[formcontrolname="integrationId"]', { timeout: 10000 })
+          .should('be.visible')
+          .then($input => {
+            if (!$input.val()) {
+              cy.wrap($input).type(integrationId, { force: true });
+            }
+          });
+      }
+    });
 
-// Save the agent
-this.clickSave();
-}
+    // Select Team
+    cy.contains('Select Team').click();
+    cy.get('#teamDD label').first().click();
+
+    // Save Agent (Encapsulated)
+    this.clickSave();
+  }
 
 
   // ----------------- Search -----------------
@@ -60,15 +60,19 @@ this.clickSave();
     this.clickClear();
   }
 
+
   // ----------------- Edit -----------------
   EditAgent(Name, Email) {
+
+    // Encapsulated method from BasePage
     this.clickEdit();
 
     cy.get('input[data-placeholder="Full Name"]').clear().type(Name);
     cy.get('input[formcontrolname="email"]').clear().type(Email);
 
-    cy.contains('span', 'Save').click();
+    this.clickSave();
   }
+
 
   // ----------------- Activate / Inactive -----------------
   changetoNotactive() {
@@ -81,11 +85,13 @@ this.clickSave();
     this.confirmDialog();
   }
 
+
   // ----------------- Delete -----------------
   DeleteAgent() {
     this.clickDelete();
     this.confirmDialog();
   }
+
 
   // ----------------- Export -----------------
   ExportAgents() {

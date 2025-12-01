@@ -78,9 +78,9 @@ describe('Agents Status Page Tests Using Fixtures', () => {
     AgentStatus.DeleteStatus();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'The agent status has been deleted successfully.');
 
+
+
   })
 
-
-
-
+  
 });

@@ -78,6 +78,7 @@ class BasePage {
 
         // Confirm login succeeded
         cy.url().should('not.include', '/auth/login');
+        cy.wait(4000);
       })
 
         // After login → Navigate to the target page
