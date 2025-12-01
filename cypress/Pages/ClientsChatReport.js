@@ -1,40 +1,42 @@
-class ClientsChatReport {
+import BasePage from "./BasePage";
+
+class ClientsChatReport extends BasePage {
     VisitClientsChatReport() {
-        //cy.visit('https://qc-community.com/WABP_QC1.7/AdminTool/pages/report/clientsChat');
         cy.contains('span.nav-link-text' , 'Clients Chat').click();
         
-
     }
     SearchByMobileNumber(MobileNumber) {
         cy.get('#phone').type(MobileNumber);
-        cy.get('span').contains('Search').click()
-
+        this.clickSearch();
     }
-    SearchByClientName(CleintName) {
-        cy.get('input[formcontrolname="clientName"]').type(CleintName);
-        cy.get('span').contains('Search').click()
+    
+    SearchByClientName(ClientName) {
+        cy.get('input[formcontrolname="clientName"]').type(ClientName);
+        this.clickSearch();
 
     }
     SearchByChannelType() {
         cy.get('#mat-select-value-1').click()
         cy.get('mat-option .mat-option-text').contains('WhatsApp').click();
-        cy.get('span').contains('Search').click()
+        this.clickSearch();
 
 
     }
     SerchByAgentName(AgentName) {
         cy.get('input[formcontrolname="agentName"]').type(AgentName);
-        cy.get('span').contains('Search').click()
+        this.clickSearch();
+        cy.contains('span' , 'View Support History').click();
+        
 
 
 
     }
     Clear() {
-        cy.get('span').contains('Clear').click();
+        this.clickClear();
 
     }
     ExportFile() {
-        cy.get('button[title="Export To Excel"]').click();
+        this.clickExport();
 
     }
     ViewChat() {

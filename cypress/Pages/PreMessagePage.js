@@ -1,4 +1,6 @@
-class PreMessagePage {
+import BasePage from "./BasePage";
+
+class PreMessagePage extends BasePage {
   visit() {
 
     //cy.visit ('/preMessages/index');
@@ -14,11 +16,11 @@ class PreMessagePage {
   }
 
   clickSearch() {
-    cy.contains('button', 'Search', { matchCase: false }).click();
+    super.clickSearch();
   }
 
   clickClear() {
-    cy.contains('button', 'Clear', { matchCase: false }).click();
+    super.clickClear();
   }
 
   // PreMessagePage.js
@@ -28,7 +30,8 @@ getSearchResults() {
 
 
   clickAdd() {
-  cy.get('span[translate]').contains('Add New Message').click();
+  super.clickAddNew();
+
 
 }
 
@@ -38,37 +41,30 @@ getSearchResults() {
   }
 
   clickSave() {
-    cy.contains('button', 'Save', { matchCase: false }).click();
+    super.clickSave();
   }
 
   clickEditFirst() {
     cy.get('table tbody tr').first().within(() => {
-      cy.contains('button', 'Edit').click();
+      super.clickEdit();
     });
   }
 
   clickDeleteFirst() {
     cy.get('table tbody tr').first().within(() => {
-      cy.contains('button', 'Delete').click();
+      super.clickDelete();
     });
   }
 
   confirmDelete() {
-    cy.get('.mat-dialog-actions > .btn-black').click()
+    super.confirmDialog();
   }
 
 
 
   openSearch() {
-        cy.get('div.search-form-expand-wrapper').then($wrapper => {
-            const isVisible = $wrapper.css('opacity') === '1';
-            if (!isVisible) {
-                cy.get('.card-head-btns-wrapper .btn-black').click();
-                cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-                  .should('have.css', 'opacity', '1');
-            }
-        });
-    }
+        super.openSearch();
+  }
 }
 
 export default new PreMessagePage();

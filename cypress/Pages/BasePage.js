@@ -7,7 +7,7 @@ class BasePage {
     deleteBtn: () => cy.contains('span', 'Delete').first(),
     addNewBtn: () => cy.contains('span', 'Add'),
     createBtn: () => cy.contains('span', 'Create'),
-    saveBtn : () => cy.contains('span' , 'Save'),
+    saveBtn: () => cy.contains('span', 'Save'),
     exportBtn: () => cy.get('button[title="Export To Excel"]'),
   };
 
@@ -36,7 +36,11 @@ class BasePage {
   }
 
   clickSave() {
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
+    this.elements.saveBtn().click();
+  }
+
+  clickExport() {
+    this.elements.exportBtn().click();
   }
 
   clickExport() {

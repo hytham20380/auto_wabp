@@ -1,38 +1,30 @@
-class SMSTemplate {
+import BasePage from "./BasePage";  
+
+class SMSTemplate extends BasePage {
 
     visitTemplate() {
         cy.get('#cdk-accordion-child-5 > .mat-expansion-panel-body > .subnav-dropdown > :nth-child(1) > .subnav-link').click();
     }
 
     AddNewTemplate(Name, Body) {
-        cy.get('span').contains('Create Template').click();
+        super.clickCreate();
         cy.get('.mat-form-field-flex').type(Name)
         cy.get('span').contains('Select Channel').click();
         cy.get('.pure-checkbox > label').click()
 
         cy.get('#body').type(Body)
-        cy.get('span').contains('Save').click();
-
+        super.clickSave();
 
 
 
     }
     openSearch() {
-        cy.get('div.search-form-expand-wrapper').then($wrapper => {
-            const isVisible = $wrapper.css('opacity') === '1';
-            if (!isVisible) {
-                cy.get('.card-head-btns-wrapper > .btn-black').click();
-
-                // Wait for the panel to become visible after clicking
-                cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-                    .should('have.css', 'opacity', '1');
-            }
-        });
+        super.openSearch();
     }
 
     SearchByName(Name) {
         cy.get('input[formcontrolname="templateName"]').type(Name);
-        cy.get('span').contains('Search ').click();
+        super.clickSearch();
 
 
     }
@@ -40,8 +32,7 @@ class SMSTemplate {
     SerchByAvailablity() {
         cy.get(':nth-child(2) > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex').click();
         cy.get('span').contains(' Yes ').click();
-        cy.get('span').contains('Search ').click();
-
+        super.clickSearch();
 
     }
     SerchByChannel() {
@@ -49,15 +40,13 @@ class SMSTemplate {
         cy.get('mat-option .mat-option-text').contains('SMS').click();
 
 
-        cy.get('span').contains('Search ').click();
-
+        super.clickSearch();
 
 
     }
     Clear() {
 
-        cy.get('span').contains('Clear').click();
-
+        super.clickClear();
 
     }
 
