@@ -183,4 +183,9 @@ describe('Sms Campaign tests', () => {
     cy.url().should('include', '/pages/smsCampaigns/report');
   });
 
+  it('Export Contacts', function () {
+    SmsCampaignPage.ExportSmsCampaign();
+
+  });
+
 });

@@ -121,13 +121,7 @@ describe('Add New Group', () => {
 
   it('should export the Excel file', () => {
     // Click the Export to Excel button
-    GroupPage.ExportGroup();
-
-    // Wait for the file to be downloaded
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const downloadedFilename = `Groups_${today}.xlsx`;
-
-    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    BasePage.Export('Groups');
   });
 
 
@@ -152,14 +146,9 @@ describe('Add New Group', () => {
 
   it('Export Group Contacts', () => {
     // Click the Export to Excel button
-    GroupPage.ClickOnExportContactsButton();
-
-    // Wait for the file to be downloaded
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const downloadedFilename = `Groups_${today}.xlsx`;
-
-    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    BasePage.Export('Groups');
   });
+
 
 
   it('Delete Normal Group', function () {
@@ -237,13 +226,7 @@ describe('Add New Group', () => {
   it('Export the Excel file for custom group', () => {
     // Click the Export to Excel button
     GroupPage.clickEdit();
-    GroupPage.ExportGroup();
-
-    // Wait for the file to be downloaded
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const downloadedFilename = `Groups_${today}.xlsx`;
-
-    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    BasePage.Export('Groups');
   });
 
   it('Delete from Custom Group Contacts List', function () {

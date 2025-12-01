@@ -1,5 +1,6 @@
 import SMSTemplate from '../Pages/SMSTemplatePage';
 import BasePage from '../Pages/BasePage';
+import SMSTemplatePage from '../Pages/SMSTemplatePage';
 
 
 describe('Shpuld Add New SMS Template Successfully  ', () => {
@@ -70,7 +71,10 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
 
   })
 
+  it('Should Export templates successfully', function () {
+    SMSTemplatePage.ExportTemplate();
 
+  })
 
 
 });

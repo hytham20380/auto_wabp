@@ -66,11 +66,7 @@ class TeamsPage extends BasePage {
 
   }
 
-  Exportteams() {
-        super.clickExport();
 
-
-}
 
 }
 

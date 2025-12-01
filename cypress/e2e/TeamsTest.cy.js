@@ -39,12 +39,8 @@ describe('Teams Page Functionality', () => {
   });
 
 it('4. Should Export Teams', function () {
-    Teams.Exportteams();
-    // Add assertions to verify the export functionality
-   const today = new Date().toISOString().slice(0,10).replace(/-/g, '');
-  const downloadedFilename = `Teams_${today}.xlsx`;
-  
-  cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    BasePage.Export('Teams');
+
     });   
 
 });

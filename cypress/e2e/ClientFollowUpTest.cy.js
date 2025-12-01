@@ -48,23 +48,10 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
 
     })
     it('Export the data in excel file successfuly  ', function () {
-        ClientFollowUpPage.Export()
-
-        // Wait for the file to be downloaded
-        const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-        const downloadedFilename = `Client Follow Ups_${today}.xlsx`;
-
-        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
-
-
+        BasePage.Export('Client Follow Ups');
 
 
     })
-
-
-
-
-
 
 
 

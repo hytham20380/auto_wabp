@@ -39,12 +39,8 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
 
   })
   it('Should Export the data as the view of the grid  successfully ', function () {
-    ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
+    BasePage.Export('Client Chat Report');
 
-    ClientsChatReport.ExportFile()
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const downloadedFilename = `Client Chat Report_${today}.xlsx`;
-    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
 
   })
   it('Should Naviagate to the chat page successfully ', function () {

@@ -85,13 +85,7 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   it('should export the Excel file', () => {
     // Click the Export to Excel button
-    AgentsPage.ExportAgents();
-
-    // Wait for the file to be downloaded
-    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const downloadedFilename = `Agents_${today}.xlsx`;
-
-    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    BasePage.Export('Agents');
   })
 
 
