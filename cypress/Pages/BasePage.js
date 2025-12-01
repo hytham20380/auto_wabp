@@ -41,12 +41,16 @@ class BasePage {
     this.elements.saveBtn().click();
   }
 
-  clickExport() {
-    this.elements.exportBtn().click();
-  }
 
-  clickExport() {
-    this.elements.exportBtn().click();
+  static Export(pageName) {
+      cy.get('button[title="Export To Excel"]').click();
+   
+        // Wait for the file to be downloaded
+        const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const downloadedFilename = `${pageName}_${today}.xlsx`;
+    
+        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+      
   }
 
   openSearch() {
@@ -151,8 +155,6 @@ class BasePage {
   }
 
 }
-
-
 
 
 

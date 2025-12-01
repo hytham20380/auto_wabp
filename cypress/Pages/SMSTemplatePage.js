@@ -76,9 +76,7 @@ class SMSTemplate extends BasePage {
         //cy.get('#mat-dialog-0').should('be.visible').click();
 
     }
-    ExportTemplate() {
-
-    }
+    
 
 }
 export default new SMSTemplate();

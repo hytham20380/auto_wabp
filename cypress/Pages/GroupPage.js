@@ -139,11 +139,7 @@ class GroupPage extends BasePage {
     super.clickSave();
   }
 
-  ExportGroup() {
-    super.clickExport();
 
-
-  }
 
   ClickSearchButtonInFilePege() {
     super.clickSearch();
@@ -160,10 +156,7 @@ class GroupPage extends BasePage {
     cy.get('input[formcontrolname="fileName"]').clear().type(fileName);
   }
 
-  ClickOnExportContactsButton() {
-    super.clickExport();
-
-  }
+  
 
   ClickOnDeleteGroupButton() {
     super.clickDelete();
