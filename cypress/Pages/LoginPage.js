@@ -4,7 +4,7 @@ class LoginPage {
         cy.visit('/auth/login')
     }
     login(email, password) {
-        cy.login(email, password).click();
+        cy.login(email, password)
         
         
 
