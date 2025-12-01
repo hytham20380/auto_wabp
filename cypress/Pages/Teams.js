@@ -1,6 +1,8 @@
-class TeamsPage {
+import BasePage from "./BasePage";
+
+class TeamsPage extends BasePage {
   visit() {
-    cy.contains('span.nav-link-text', 'Teams').click();
+    cy.contains('span', 'Teams').click();;
   }
 
   enterName(name) {
@@ -15,19 +17,23 @@ class TeamsPage {
 
   updateWorkingType() {
 
-    cy.get('span').contains('Custom').click({ force: true });                // opens the dropdown
-
-    cy.get(':nth-child(1) > label').click();
+    cy.get('.c-btn').click({ force: true });                // opens the dropdown
+    cy.get('.lazyContainer > :nth-child(2)').click();
+    
 
 
   }
 
   clickSearch() {
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
   }
 
   clickClear() {
-    cy.contains('button', 'Clear').click(); // Capital "Clear"
+    super.clickClear();
+  }
+
+  getSearchResults() {
+    return cy.get('table'); // Capital "Clear"
   }
 
   clickView() {
@@ -35,11 +41,15 @@ class TeamsPage {
   }
 
   clickEdit() {
-    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(2) > .btn > .ng-tns-c255-37').first().click();
+     super.clickEdit();
+  }
+
+  clickDelete() {
+    super.clickDelete();
   }
 
   clickSave() {
-    cy.get('span').contains('Save').click();
+    super.clickSave();
   }
 
   assertTeamVisible(teamName) {
@@ -52,18 +62,13 @@ class TeamsPage {
 
 
   openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper .btn-black').click();
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
-      }
-    });
+    super.openSearch();
+
   }
 
   Exportteams() {
-        cy.get('.btn-black-outline').click();
+        super.clickExport();
+
 
 }
 

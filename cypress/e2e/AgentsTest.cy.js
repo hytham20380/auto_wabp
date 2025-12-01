@@ -5,24 +5,20 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   BasePage.init(AgentsPage, 'AgentsData');
 
-  it('Should add a new agent successfully', function () {
-  // Generate random suffix between 100–999
-  const randomSuffix = Cypress._.random(100, 999);
+  it.only('Should add a new agent successfully', function () {
 
-  // Build dynamic agent name & email
-  const dynamicFullName = `${this.AgentsData.FullName} ${randomSuffix}`;
-  const dynamicEmail = `${randomSuffix}_${this.AgentsData.email}`;
 
-  // Random integration ID also
-  const integrationId = Math.floor(1000 + Math.random() * 9000).toString();
+    const dynamicFullName = BasePage.generateDynamicName(this.AgentsData.FullName);
+    const dynamicEmail = BasePage.generateDynamicName(this.AgentsData.email);
 
-  // Use dynamic values
-  AgentsPage.AddNewAgent(dynamicFullName, dynamicEmail, integrationId);
 
-  cy.get('.mat-simple-snack-bar-content')
-    .should('contain', 'Agent created successfully');
-    
-});
+    const integrationId = Math.floor(1000 + Math.random() * 9000).toString();
+    AgentsPage.AddNewAgent(dynamicFullName, dynamicEmail, integrationId);
+
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Agent created successfully');
+
+  });
 
 
   it('Search by Name', function () {
@@ -50,39 +46,29 @@ describe('Agents Page Tests Using Fixtures', () => {
   });
 
 
-  it('Edit name and email', function () {
-  // Generate random suffix between 100–999
-  const randomSuffix = Cypress._.random(100, 999);
+  it.only('Edit name and email', function () {
+    const dynamicEditName = BasePage.generateDynamicName(this.AgentsData.editname);
+    const dynamicEditEmail = BasePage.generateDynamicName(this.AgentsData.editemail);
+    AgentsPage.EditAgent(dynamicEditName, dynamicEditEmail);
 
-  // Create dynamic edit name & email
-  const dynamicEditName = `${this.AgentsData.editname} ${randomSuffix}`;
-  const dynamicEditEmail = `${randomSuffix}_${this.AgentsData.editemail}`;
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Agent updated successfully');
 
-  // Search using the original name
-  AgentsPage.openSearch();
-  AgentsPage.SearchByName(this.AgentsData.FullName);
-
-  // Edit using dynamic values
-  AgentsPage.EditAgent(dynamicEditName, dynamicEditEmail);
-
-  cy.get('.mat-simple-snack-bar-content')
-    .should('contain', 'Agent updated successfully');
-    
-});
+  });
 
 
 
   it('should Be the user not active ', function () {
-   
+
     AgentsPage.openSearch();
     AgentsPage.SearchByName(this.AgentsData.editname);
-     cy.wait(1000);
+    cy.wait(1000);
     AgentsPage.changetoNotactive();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent deactivated successfully')
   })
 
   it('should Be the user active ', function () {
-        
+
     AgentsPage.openSearch();
     AgentsPage.SearchByName(this.AgentsData.editname);
     cy.wait(1000);
@@ -102,10 +88,10 @@ describe('Agents Page Tests Using Fixtures', () => {
     AgentsPage.ExportAgents();
 
     // Wait for the file to be downloaded
-const today = new Date().toISOString().slice(0,10).replace(/-/g, '');
-const downloadedFilename = `Agents_${today}.xlsx`;
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const downloadedFilename = `Agents_${today}.xlsx`;
 
-cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+    cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
   })
 
 

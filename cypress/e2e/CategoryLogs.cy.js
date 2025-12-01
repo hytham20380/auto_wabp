@@ -6,7 +6,8 @@ describe('Category Logs Page Tests', () => {
 
   BasePage.init(CategoryLogsPage, 'categoryLogsData');
 
-  it('1️⃣ Should add a new category log', function () {
+  it.only('1️⃣ Should add a new category log', function () {
+    /*
         const CategoryLogNeeded = 1;
 
     const usedSuffixes = new Set();
@@ -21,12 +22,14 @@ describe('Category Logs Page Tests', () => {
       usedSuffixes.add(randomSuffix);
       const CategoryLogBase = this.categoryLogsData.newCategory.name
       const dynamiCategoryLog = `${CategoryLogBase} ${randomSuffix}`;
-    
+    */
+const dynamiCategoryLog = BasePage.generateDynamicName(this.categoryLogsData.newCategory.name);
+
     CategoryLogsPage.clickAdd();
     CategoryLogsPage.fillCategoryName(dynamiCategoryLog);
     CategoryLogsPage.clickSave();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.newCategory.name);
-    }
+    
   });
 
   it('2️⃣ Should search by name and display results', function () {

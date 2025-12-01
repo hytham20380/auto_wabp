@@ -6,26 +6,6 @@ import BasePage from '../Pages/BasePage';
 
 describe('Pre Message Page Tests', () => {
 
-  /*
-  beforeEach(function () {
-    // Load fixtures first
-    cy.fixture('LoginData').as('LoginData');
-    cy.fixture('PreMessageData').as('data');
-
-    // Perform login and wait for successful navigation
-    cy.get('@LoginData').then((loginData) => {
-      LoginPage.visit();
-      LoginPage.login(loginData.admin.email, loginData.admin.password);
-
-      // Wait for successful login (adjust the selector to match your app)
-      cy.url().should('include', '/pages/dashboard');
-      cy.wait(5000)
-    });
-
-    // Now visit the category log page after login
-    PreMessagePage.visit();
-  });
-*/
   BasePage.init(PreMessagePage, 'PreMessageData');
 
   it('Should add a new Message ', function () {

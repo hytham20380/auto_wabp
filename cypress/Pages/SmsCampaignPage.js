@@ -1,4 +1,7 @@
-class SmsCampaignPage {
+import BasePage from "./BasePage";
+
+
+class SmsCampaignPage extends BasePage {
 
 
     visit() {
@@ -8,7 +11,7 @@ class SmsCampaignPage {
   }
 
   AddNewSmsCampaignInfoTab(CampaignName) {
-    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
+    super.clickCreate();
 
     cy.get('span').contains('Select Channel').click();
     cy.contains('label', 'SMS').prev('input[type="checkbox"]').check({ force: true }); 
@@ -24,7 +27,7 @@ class SmsCampaignPage {
 ContactsTab(Mobilenumber) {
 
     cy.get('#phone').type(Mobilenumber);
-    cy.get('span').contains('Add').click();
+    super.clickAddNew({ timeout: 5000 });
     cy.get('button').contains('Next').click({ force: true });
 
   }
@@ -54,12 +57,12 @@ ContactsTab(Mobilenumber) {
     //cy.get('#cdk-step-label-0-2').click();
     //cy.get('#cdk-step-label-0-3').click();
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click({ force: true });
+    super.clickSave({ timeout: 5000 });
 
   }
 
 customGroupCamp(CustomOnspot, TemplateName) {
-    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
+    super.clickCreate({ timeout: 5000 });
 
     cy.get('span').contains('Select Channel').click();
     cy.contains('label', 'SMS').prev('input[type="checkbox"]').check({ force: true });
@@ -86,7 +89,7 @@ customGroupCamp(CustomOnspot, TemplateName) {
 }
 
  normalGroupCamp(NormalSchedual, TemplateName) {
-    cy.contains('Create New Campaign', { timeout: 10000 }).should('be.visible').click();
+    super.clickCreate({ timeout: 5000 });
 
     cy.get('span').contains('Select Channel').click();
     cy.contains('label', 'SMS').prev('input[type="checkbox"]').check({ force: true });
@@ -121,7 +124,7 @@ cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="over
     cy.wait(500)
  }
 ScheduleCampaignInfoTab(CampaignName) {
-    cy.get('span').contains('Create New Campaign').click();
+    super.clickCreate({ timeout: 5000 });
     cy.get('span').contains('Select Channel').click();
     cy.contains('label', 'SMS').prev('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
@@ -179,23 +182,16 @@ ScheduleCampaignInfoTab(CampaignName) {
     cy.get('span').contains('Next').click();
     cy.scrollTo('top');
   }
-openSearch() {
-    cy.get('div.search-form-expand-wrapper').then($wrapper => {
-      const isVisible = $wrapper.css('opacity') === '1';
-      if (!isVisible) {
-        cy.get('.card-head-btns-wrapper > .btn-black').click();
 
-        // Wait for the panel to become visible after clicking
-        cy.get('div.search-form-expand-wrapper', { timeout: 10000 })
-          .should('have.css', 'opacity', '1');
-      }
-    });
+
+ openSearch() {
+    super.openSearch();
   
 }
 
 SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
 
   }
 
@@ -203,22 +199,22 @@ SearchByCampaignName(CampaignName) {
     cy.get('#mat-select-value-1').click();
     cy.get('.mat-option-text').contains('Sent').click();
 
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
   }
 SearchByOnspotCmapaign() {
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Onspot').click();
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
   }
   SearchByCustomCampaign() {
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Custom').click();
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
   }
 SearchByScheduledCmapaign() {
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Scheduled').click();
-    cy.contains('button', 'Search').click();
+    super.clickSearch();
   }
 
   Clearbutton() {
@@ -228,7 +224,7 @@ SearchByScheduledCmapaign() {
     cy.get('.mat-option-text').contains('Sent').click();
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Onspot').click();
-    cy.contains('button', 'Clear').click();
+    super.clickClear();
   }
 DuplicateWithoutChanging() {
 
@@ -262,11 +258,12 @@ DuplicateWithoutChanging() {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+   super.clickSave({ timeout: 5000 });
 
 
  
  }
+
 OnspotToScheduled() {
 
 
@@ -336,7 +333,7 @@ OnspotToScheduled() {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+    super.clickSave({ timeout: 5000 });
 
 
  
@@ -378,7 +375,7 @@ OnspotToScheduled() {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+    super.clickSave({ timeout: 5000 });
 
 
   }
@@ -421,7 +418,7 @@ CustomToNormal(Mobilenumber) {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+    super.clickSave({ timeout: 5000 });
 
 
   }
@@ -463,7 +460,7 @@ CustomToNormal(Mobilenumber) {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+    super.clickSave({ timeout: 5000 });
 
 
   }
@@ -525,14 +522,15 @@ DuplicateChangeTemp(TemplateName) {
 
     cy.wait(500)
 
-    cy.get('button', { timeout: 5000 }).contains('Save').should('be.visible').click();
+    super.clickSave({ timeout: 5000 });
 
 
 
   }
 
 ExportSmsCampaign() {
-        cy.get('.btn-black-outline').click();
+  cy.contains('span', 'View').click();     
+  super.clickExport();
 }
 
 }
