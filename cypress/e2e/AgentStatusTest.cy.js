@@ -143,11 +143,7 @@ describe('Agents Status Page Tests Using Fixtures', () => {
 
 
 
-    
-
   })
 
   
-
-
 });
