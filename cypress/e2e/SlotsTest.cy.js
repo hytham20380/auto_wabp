@@ -44,6 +44,16 @@ it('Should Export the data successfully ',function(){
     BasePage.Export('Slot');
 
 });
+it('Should search by club successfully', function () {
+
+    const selectedClub = SlotsPage.SearchByClub();
+    BasePage.clickClear();
+    cy.get('mat-select[formcontrolname="clubId"]').should('contain', 'All')
+
+
+});
+
+
 
 
 

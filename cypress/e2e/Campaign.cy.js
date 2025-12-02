@@ -6,13 +6,11 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
 
-  it('Should create Onspot Normal campaigns Successfully', function () {
+  it('Should create Onspot campaigns Successfully', function () {
 
     const data = BasePage.generateCampaignData(this.CampaignData);
-    const SendingPreferences = this.CampaignData.SendingPreferences[0];
-    const GroupType = this.CampaignData.GroupType[0];
 
-    CampaignPage.AddNewCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName,SendingPreferences,GroupType);
+    CampaignPage.AddNewCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName);
     CampaignPage.ContactsTab(data.dynamicMobileNumber);
     CampaignPage.TemplateTab(data.randomTemplate);
     cy.wait(3000); // Waits for 3 seconds
@@ -21,11 +19,9 @@ describe('Campaign Page Tests Using Fixtures', () => {
   });
 
   it('Should create Onspot campaigns with custom group Successfully', function () {
-    const SendingPreferences = this.CampaignData.SendingPreferences[0];
-    const GroupType = this.CampaignData.GroupType[1];
 
     const data = BasePage.generateCampaignData(this.CampaignData);
-    CampaignPage.customGroupCamp(data.dynamicCampaignName, data.randomTemplate, this.CampaignData.ChannelName,SendingPreferences,GroupType)
+    CampaignPage.customGroupCamp(data.dynamicCampaignName, data.randomTemplate, this.CampaignData.ChannelName)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
@@ -70,7 +66,7 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
 
-  it.only('Should Duplicate The Campaign without any changing ', function () {
+  it('Should Duplicate The Campaign without any changing ', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot);
     CampaignPage.DuplicateWithoutChanging();
@@ -80,7 +76,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
 
-  it.only('Should Duplicate the campaign with changing from Custom to Normal ', function () {
+  it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.CustomOnspot)
     CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
@@ -90,7 +86,7 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
 
-  it.only('Should Duplicate the campaign with changing from Normal to Custom ', function () {
+  it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot)
     CampaignPage.NormalToCutom()
@@ -109,7 +105,7 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
 
-  it.only('Should Duplicate the campaign with changing from schedual to onspot ', function () {
+  it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalSchedual)
     CampaignPage.ScheduledToOnspot()
@@ -119,7 +115,7 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
 
-  it.only('Should Duplicate the campaign with changing The template ', function () {
+  it('Should Duplicate the campaign with changing The template ', function () {
     CampaignPage.openSearch()
     CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
     CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
