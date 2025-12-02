@@ -34,7 +34,7 @@ describe('Clients Chat Report Tests Using Fixtures', () => {
   })
   it('Should clear the fields succeefully  ', function () {
     ClientsChatReport.SearchByClientName(this.ClientsChatData.ClientName)
-    ClientsChatReport.Clear();
+    BasePage.clickClear();
     cy.get('input[formcontrolname="clientName"]').should('have.value', '');
 
   })

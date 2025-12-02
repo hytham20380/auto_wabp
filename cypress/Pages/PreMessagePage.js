@@ -16,11 +16,7 @@ class PreMessagePage extends BasePage {
   }
 
   clickSearch() {
-    super.clickSearch();
-  }
-
-  clickClear() {
-    super.clickClear();
+    super.clickSearch();              //super is used to Call the parent constructor, Call a method from the parent class.
   }
 
   // PreMessagePage.js
@@ -50,21 +46,7 @@ getSearchResults() {
     });
   }
 
-  clickDeleteFirst() {
-    cy.get('table tbody tr').first().within(() => {
-      super.clickDelete();
-    });
-  }
-
-  confirmDelete() {
-    super.confirmDialog();
-  }
-
-
-
-  openSearch() {
-        super.openSearch();
-  }
+ 
 }
 
 export default new PreMessagePage();

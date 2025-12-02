@@ -20,7 +20,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Template name successfully', function () {
 
 
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
     cy.get('tbody > :nth-child(1) > .cdk-column-name').should('contain', 'Auto SMS Template')
 
@@ -29,7 +29,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Template availability successfully', function () {
 
 
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SerchByAvailablity();
     cy.get('tbody > :nth-child(1) > .cdk-column-availability').should('contain', 'Yes')
 
@@ -38,7 +38,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should search by Channel name successfully', function () {
 
 
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SerchByChannel();
     cy.get('tbody > :nth-child(1) > .cdk-column-channel').should('contain', 'SMS')
 
@@ -46,15 +46,15 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   it('Should clear the data successfully', function () {
 
 
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
-    SMSTemplate.Clear()
+    BasePage.clickClear();
     cy.get('input[formcontrolname="templateName"]').should('have.value', '')
 
   })
 
   it('Should change the template to unavailable successfully', function () {
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SerchByAvailablity();
     SMSTemplate.ChangeToNotAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template deactivated successfully')
@@ -63,7 +63,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   })
 
   it('Should change the template to available successfully', function () {
-    SMSTemplate.openSearch();
+    BasePage.openSearch();
     SMSTemplate.SearchByName(this.SMSTemplateData.TemplateName[0]);
     SMSTemplate.ChengeToAvailable()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Template activated successfully')

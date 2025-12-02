@@ -46,21 +46,18 @@ class AgentStatus extends BasePage {
   }
 
   // ----------------- Search -----------------
-  SerchByName(StatusName) {
-    this.openSearch();
+  SearchByName(StatusName) {
     cy.get('input[formcontrolname="statusName"]').type(StatusName);
     this.clickSearch();
   }
 
   SearchByActiveStatus() {
-    this.openSearch();
     cy.get('#mat-select-value-1').click();
     cy.contains('.mat-option-text', 'Active').click();
     this.clickSearch();
   }
 
   SearchByInActiveStatus() {
-    this.openSearch();
     cy.get('#mat-select-value-1').click();
     cy.contains('.mat-option-text', 'Inactive').click();
     this.clickSearch();
@@ -77,11 +74,6 @@ class AgentStatus extends BasePage {
     cy.contains('button[mat-menu-item]', 'Auto Offline').click();
   }
 
-  // ----------------- Delete -----------------
-  DeleteStatus() {
-    this.clickDelete();
-    this.confirmDialog();
-  }
 
   // ----------------- Helper: Set Color -----------------
   setColor() {

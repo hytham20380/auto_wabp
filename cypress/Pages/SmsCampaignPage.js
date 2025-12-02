@@ -11,7 +11,7 @@ class SmsCampaignPage extends BasePage {
   }
 
   AddNewSmsCampaignInfoTab(CampaignName) {
-    super.clickCreate();
+    super.clickCreate();                           //super is used to Call the parent constructor, Call a method from the parent class.
 
     cy.get('span').contains('Select Channel').click();
     cy.contains('label', 'SMS').prev('input[type="checkbox"]').check({ force: true }); 
@@ -183,12 +183,6 @@ ScheduleCampaignInfoTab(CampaignName) {
     cy.scrollTo('top');
   }
 
-
- openSearch() {
-    super.openSearch();
-  
-}
-
 SearchByCampaignName(CampaignName) {
     cy.get('input[formcontrolname="campaignName"]').type(CampaignName)
     super.clickSearch();
@@ -224,7 +218,7 @@ SearchByScheduledCmapaign() {
     cy.get('.mat-option-text').contains('Sent').click();
     cy.get('#mat-select-value-3').click();
     cy.get('.mat-option-text').contains('Onspot').click();
-    super.clickClear();
+    BasePage.clickClear();
   }
 DuplicateWithoutChanging() {
 

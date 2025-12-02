@@ -8,17 +8,17 @@ describe('Teams Page Functionality', () => {
 
 
   it('1. Search for existing team', function () {
-    Teams.openSearch();
+    BasePage.openSearch();
     Teams.enterName(this.TeamsData.team.name);
     Teams.clickSearch();
     Teams.assertTeamVisible(this.TeamsData.team.name);
   });
 
   it('2. Clear search fields', function () {
-    Teams.openSearch();
+    BasePage.openSearch();
     Teams.enterName(this.TeamsData.team.name);
     Teams.selectWorkingType();
-    Teams.clickClear();
+    BasePage.clickClear();
 
     cy.get(".mat-select-min-line").should('contain', 'All');
   });
@@ -38,10 +38,10 @@ describe('Teams Page Functionality', () => {
     Teams.assertTeamVisible(this.TeamsData.editedTeam.name);
   });
 
-it('4. Should Export Teams', function () {
+  it('4. Should Export Teams', function () {
     BasePage.Export('Teams');
 
-    });   
+  });
 
 });
 

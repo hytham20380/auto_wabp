@@ -70,7 +70,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Search by the Campaign Title Successfully', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.smsCampaigns[0].CampaignName);
     cy.get('.example-element-row > .cdk-column-title').should('contain', this.SmsCampaign.smsCampaigns[0].CampaignName)
@@ -80,7 +80,7 @@ describe('Sms Campaign tests', () => {
 
 
   it('Should Search by Onspot Sending Type Successfully', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus();
 
@@ -90,7 +90,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Search by Sent Sending Status Successfully', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus()
 
@@ -100,7 +100,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Search by Scheduled Sending Type Successfully', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByScheduledCmapaign()
 
@@ -109,7 +109,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Clear data Successfully', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.Clearbutton()
 
@@ -126,7 +126,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing from onspot to schedual', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
     SmsCampaignPage.SearchByOnspotCmapaign();
     SmsCampaignPage.OnspotToScheduled();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -136,7 +136,7 @@ describe('Sms Campaign tests', () => {
 
   it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
 
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByScheduledCmapaign()
 
@@ -147,7 +147,7 @@ describe('Sms Campaign tests', () => {
   });
 
   it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.CustomOnspot)
 
@@ -159,7 +159,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.NormalSchedual)
 
@@ -168,7 +168,7 @@ describe('Sms Campaign tests', () => {
 
   });
   it('Should Duplicate the campaign with changing The template ', function () {
-    SmsCampaignPage.openSearch()
+    BasePage.openSearch()
 
     SmsCampaignPage.SearchByCampaignName(this.SmsCampaign.NormalSchedual)
 

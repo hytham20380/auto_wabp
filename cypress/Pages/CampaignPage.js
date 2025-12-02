@@ -167,9 +167,6 @@ class CampaignPage extends BasePage{
     this.clickSearch();
   }
 
-  openSearch() {
-    super.openSearch();
-  }
 
   DuplicateWithoutChanging() {
 

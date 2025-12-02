@@ -35,7 +35,7 @@ describe('Add New Group', () => {
 
   it('Search In Group Page By Name', function () {
 
-    GroupPage.openSearch();
+    BasePage.openSearch();
     GroupPage.EnterGroupName(this.GroupData.updateName);
     GroupPage.ClickOnSearchButtonOnGroupPage();
     GroupPage.getSearchResults().should('contain', this.GroupData.updateName);
@@ -43,9 +43,20 @@ describe('Add New Group', () => {
 
   });
 
+
+  it('Clear Search fields', function () {
+
+    BasePage.openSearch();
+    GroupPage.EnterGroupName(this.GroupData.updateName);
+    BasePage.clickClear();
+    cy.get('input[data-placeholder="Group Name"]').should('have.value', '');
+
+
+  });
+
   it('Search In Group Page By Group Type', function () {
 
-    GroupPage.openSearch();
+    BasePage.openSearch();
     GroupPage.selectGrouptypeInsearch(this.GroupData.groupType);
     GroupPage.ClickOnSearchButtonOnGroupPage();
     GroupPage.getSearchResults().should('contain', this.GroupData.groupType);
@@ -55,7 +66,7 @@ describe('Add New Group', () => {
 
   it('Search In Group Page By Group Availability', function () {
 
-    GroupPage.openSearch();
+    BasePage.openSearch();
     GroupPage.selectGroupAvailability('No');
     GroupPage.ClickOnSearchButtonOnGroupPage();
     GroupPage.getSearchResults().should('contain', this.GroupData.updateAvailability);
@@ -91,7 +102,7 @@ describe('Add New Group', () => {
 
     GroupPage.clickEdit();
     GroupPage.searchWithmobileNumber(this.GroupData.mobileNumber);
-    GroupPage.clickClearingroupcontactslist();
+    BasePage.clickClear();
     GroupPage.getSearchResults().should('have.value', '');
 
 
@@ -100,8 +111,7 @@ describe('Add New Group', () => {
   it('Delete from Group Contacts List', function () {
 
     GroupPage.clickEdit();
-    GroupPage.deleteContactsfromList();
-    GroupPage.ConfirmdeleteContactsfromList();
+    BasePage.Delete();
     cy.get('.cdk-overlay-container', { timeout: 10000 }).should('contain', 'Group Contact Deleted Successfully');
 
 
@@ -138,7 +148,7 @@ describe('Add New Group', () => {
 
     GroupPage.Clickonfilebutton();
     GroupPage.enterfilename(this.GroupData.fileName);
-    GroupPage.ClickClearButtonInFilePege();
+    BasePage.clickClear();
     GroupPage.getSearchResults().should('have.value', '');
 
   });
@@ -152,9 +162,7 @@ describe('Add New Group', () => {
 
 
   it('Delete Normal Group', function () {
-
-    GroupPage.ClickOnDeleteGroupButton();
-    GroupPage.ClickOnConfirmDeleteGroupButton();
+    BasePage.Delete();
     cy.get('.cdk-overlay-container', { timeout: 10000 }).should('contain', 'Group Deleted Successfully');
 
 
@@ -193,7 +201,7 @@ describe('Add New Group', () => {
 
   it('Search In Group Page By Custom Group Typy', function () {
 
-    GroupPage.openSearch();
+    BasePage.openSearch();
     GroupPage.selectGrouptypeInsearch(this.GroupData.customGrouptype);
     GroupPage.ClickOnSearchButtonOnGroupPage();
     GroupPage.getSearchResults().should('contain', this.GroupData.customGrouptype);
@@ -203,7 +211,7 @@ describe('Add New Group', () => {
 
   it('Search In Group Page By Custom Group Name', function () {
 
-    GroupPage.openSearch();
+    BasePage.openSearch();
     GroupPage.EnterGroupName('Update Custom Group');
     GroupPage.ClickOnSearchButtonOnGroupPage();
     GroupPage.getSearchResults().should('contain', this.GroupData.updateCustomname);
@@ -232,8 +240,7 @@ describe('Add New Group', () => {
   it('Delete from Custom Group Contacts List', function () {
 
     GroupPage.clickEdit();
-    GroupPage.deleteContactsfromList();
-    GroupPage.ConfirmdeleteContactsfromList();
+    BasePage.Delete();
     cy.get('.cdk-overlay-container', { timeout: 10000 }).should('contain', 'Group Contact Deleted Successfully');
 
 
@@ -241,8 +248,7 @@ describe('Add New Group', () => {
 
   it('Delete Custom Group', function () {
 
-    GroupPage.ClickOnDeleteGroupButton();
-    GroupPage.ClickOnConfirmDeleteGroupButton();
+    BasePage.Delete();
     cy.get('.cdk-overlay-container', { timeout: 10000 }).should('contain', 'Group Deleted Successfully');
 
 
