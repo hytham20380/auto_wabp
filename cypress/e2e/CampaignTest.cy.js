@@ -6,11 +6,13 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
 
-  it('Should create Onspot campaigns Successfully', function () {
+  it('Should create Onspot Normal campaigns Successfully', function () {
 
     const data = BasePage.generateCampaignData(this.CampaignData);
+    const SendingPreferences = this.CampaignData.SendingPreferences[0];
+    const GroupType = this.CampaignData.GroupType[0];
 
-    CampaignPage.AddNewCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName);
+    CampaignPage.AddNewCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName,SendingPreferences,GroupType);
     CampaignPage.ContactsTab(data.dynamicMobileNumber);
     CampaignPage.TemplateTab(data.randomTemplate);
     cy.wait(3000); // Waits for 3 seconds
@@ -19,14 +21,16 @@ describe('Campaign Page Tests Using Fixtures', () => {
   });
 
   it('Should create Onspot campaigns with custom group Successfully', function () {
+    const SendingPreferences = this.CampaignData.SendingPreferences[0];
+    const GroupType = this.CampaignData.GroupType[1];
 
     const data = BasePage.generateCampaignData(this.CampaignData);
-    CampaignPage.customGroupCamp(data.dynamicCampaignName, data.randomTemplate, this.CampaignData.ChannelName)
+    CampaignPage.customGroupCamp(data.dynamicCampaignName, data.randomTemplate, this.CampaignData.ChannelName,SendingPreferences,GroupType)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
   });
 
-('Should create Scheduled campaigns Successfully', function () {
+it('Should create Scheduled campaigns Successfully', function () {
     const data = BasePage.generateCampaignData(this.CampaignData);
 
     CampaignPage.ScheduleCampaignInfoTab(data.dynamicCampaignName, this.CampaignData.ChannelName);

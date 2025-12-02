@@ -56,7 +56,7 @@ class BasePage {
         const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
         const downloadedFilename = `${pageName}_${today}.xlsx`;
     
-        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 5000 }).should('exist')
       
   } 
 
@@ -95,7 +95,11 @@ class BasePage {
         // Then load test data fixture
         .then(() => {
           return cy.fixture(fixtureName).then((data) => {
-            this[fixtureName] = data;   // Attach data to test context
+              
+                this[fixtureName] = data;
+
+                
+                PageName[fixtureName] = data;
           });
         });
 
@@ -133,18 +137,14 @@ class BasePage {
   }
 
   static generateSMSCampaignData(fixtureData) {
-    // اختار أول campaign من smsCampaigns
     const base = fixtureData.smsCampaigns[0];
 
-    // توليد رقم عشوائي بين 100 و 999
     const randomSuffix = Cypress._.random(100, 999);
 
-    // بناء الأسماء الديناميكية
     const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
     const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
     const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
 
-    // اختيار template عشوائي
     const randomTemplate = Cypress._.sample(fixtureData.templateNames);
 
     return {
