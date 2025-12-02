@@ -49,7 +49,7 @@ class BasePage {
         const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
         const downloadedFilename = `${pageName}_${today}.xlsx`;
     
-        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 15000 }).should('exist')
+        cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 5000 }).should('exist')
       
   }
 
@@ -93,7 +93,11 @@ class BasePage {
         // Then load test data fixture
         .then(() => {
           return cy.fixture(fixtureName).then((data) => {
-            this[fixtureName] = data;   // Attach data to test context
+              
+                this[fixtureName] = data;
+
+                
+                PageName[fixtureName] = data;
           });
         });
 
