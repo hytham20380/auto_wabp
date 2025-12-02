@@ -1,24 +1,37 @@
 import 'cypress-file-upload';
 import BasePage from './BasePage';
 
-class CampaignPage extends BasePage{
+class CampaignPage extends BasePage {
+
+  step1() {
+    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+  }
+
+  step2() {
+    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click();
+  }
+
+  step3() {
+    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+  }
 
   visit() {
-    //cy.visit('pages/campaigns')
-    //cy.contains('span.nav-link-text').contains('Campaigns').click()
-       cy.contains('span.nav-link-text' , 'Campaigns').click();
+    cy.contains('span.nav-link-text', 'Campaigns').click();
   }
-  AddNewCampaignInfoTab(CampaignName,ChannelName) {
+
+  AddNewCampaignInfoTab(CampaignName, ChannelName, SendingPreferences, GroupType) {
+
+
     this.clickCreate();
     cy.get('span').contains('Select Channel').click();
-    cy.contains('li',ChannelName).find('input[type="checkbox"]').check({ force: true });
+    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
     cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
-    cy.get('span').contains('Onspot').click();
-    cy.get('span').contains('Normal').click();
+    cy.get('span').contains(SendingPreferences).click();
+    cy.get('span').contains(GroupType).click();
     cy.get('span').contains('Next').click();
-    cy.scrollTo('top');
-
+    //cy.scrollTo('top');
   }
+
   ContactsTab(Mobilenumber) {
 
     cy.get('#phone').type(Mobilenumber);
@@ -28,78 +41,34 @@ class CampaignPage extends BasePage{
   }
 
   TemplateTab(TemplateName) {
-    // 1️⃣ Click the "Select Template" to open the dropdown
     cy.get('span').contains('Select Template').click();
-    // 2️⃣ Locate the real input that appears in the dropdown for searching
-    // Check your app’s HTML to find the real input element inside the dropdow
+
     cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input', { timeout: 5000 })
       .should('be.visible')
       .clear()
       .type(TemplateName, { force: true });
-    // 3️⃣ Wait for the search results and click the matching checkbox
-    cy.contains('li', TemplateName, { timeout: 5000 })
-      .find('input[type="checkbox"]')
-      .check({ force: true });
-    // 4️⃣ Click the "+ Fill" button
+
+    cy.contains('li', TemplateName, { timeout: 5000 }).find('input[type="checkbox"]').check({ force: true });
     cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
-    // 5️⃣ Click "Fill"
+
     cy.contains('button', 'Fill').click({ force: true });
-
-
-
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
-    //cy.get('#cdk-step-label-0-2').click();
-    //cy.get('#cdk-step-label-0-3').click();
-
+    this.step3();
     this.clickSave();
 
   }
-  customGroupCamp(CampaignName, TemplateName,ChannelName) {
-    this.clickCreate();
 
-    cy.get('span').contains('Select Channel').click();
-    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
-    cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
-    cy.get('span').contains('Onspot').click();
-    cy.get('span').contains('Customized').click();
-    cy.get('span').contains('Next').click();
-    //cy.scrollTo('top');
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-    cy.wait(500)
-    cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
-    cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
-
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-    cy.wait(500)
-    this.TemplateTab(TemplateName);
-
-
-    cy.wait(1000); // زيادة مهلة بسيطة قبل الضغط
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count')
-      .should('exist')
-      .click({ force: true });
-
-    cy.wait(500)
-
-  }
-
-  ScheduleCampaignInfoTab(CampaignName,ChannelName) {
-    this.clickCreate();
-    cy.get('span').contains('Select Channel').click();
-    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
-    cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
-    cy.get('span').contains('Scheduled').click();
+  selectFutureDateTime() {
     const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + 2); // Adds 2 days
-    futureDate.setHours(10); // Sets hour to 10 AM
-    futureDate.setMinutes(0); // Sets minutes to 00
+    futureDate.setDate(futureDate.getDate() + 2); // 2 days from today
+    futureDate.setHours(10); // 10 AM
+    futureDate.setMinutes(0); // 00 minutes
 
     const day = futureDate.getDate();
     const hour = futureDate.getHours();
     const minute = futureDate.getMinutes();
 
     const ampm = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour % 12 || 12; // convert 24h → 12h
+    const displayHour = hour % 12 || 12;
 
     // Open date picker
     cy.get('input[formcontrolname="sendingDateTime"]').click();
@@ -134,9 +103,32 @@ class CampaignPage extends BasePage{
         }
       });
 
-
-    // Step 7: Confirm the selection
+    // Confirm selection
     cy.get('button mat-icon').contains('done').parents('button').click({ force: true });
+  }
+  customGroupCamp(CampaignName, TemplateName, ChannelName, SendingPreferences, GroupType) {
+
+    this.AddNewCampaignInfoTab(CampaignName, ChannelName, SendingPreferences, GroupType)
+    this.step1();
+    cy.wait(500)
+    cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
+    cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
+
+    this.step2();
+    cy.wait(500)
+    this.TemplateTab(TemplateName);
+
+
+  }
+
+  ScheduleCampaignInfoTab(CampaignName, ChannelName) {
+    this.clickCreate();
+    cy.get('span').contains('Select Channel').click();
+    cy.contains('li', ChannelName).find('input[type="checkbox"]').check({ force: true });
+    cy.get('input[data-placeholder="Name your campaign"]').should('be.visible').type(CampaignName);
+    cy.get('span').contains('Scheduled').click();
+
+    this.selectFutureDateTime();
 
     cy.get('span').contains('Normal').click();
     cy.get('span').contains('Next').click();
@@ -171,36 +163,39 @@ class CampaignPage extends BasePage{
     super.openSearch();
   }
 
+  duplicateAndRename() {
+    cy.contains('Duplicate').click();
+    cy.get('mat-dialog-container').should('be.visible');
+    cy.contains('button', 'Yes').click();
+    cy.wait(300);
+
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const newName = `Campaign-Rand-${randomSuffix}`;
+
+    cy.get('input[formcontrolname="name"]')
+      .clear({ force: true })
+      .type(newName, { force: true });
+
+    return newName;
+  }
+
+
   DuplicateWithoutChanging() {
 
-    cy.get('span').contains('Duplicate').click();
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
-    const newValue = `Campaign-Rand-${randomSuffix}`;
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
+    this.duplicateAndRename();
     cy.get('span').contains('Onspot').click();
 
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    cy.wait(500);
+    this.step1();
+
+    cy.wait(500)
+    this.step2();
+
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-    cy.wait(500)
-
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-    cy.wait(500)
-
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-
+    this.step3();
     cy.wait(500)
 
     this.clickSave();
@@ -209,72 +204,24 @@ class CampaignPage extends BasePage{
 
   OnspotToScheduled() {
 
-
-    cy.get('span').contains('Duplicate').click();
-
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`;
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
+    this.duplicateAndRename();
 
     cy.get('span').contains('Scheduled').click();
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + 2); // Adds 2 days to the current date
-    futureDate.setHours(10); // Sets the hour to 10 AM
-    futureDate.setMinutes(0); // Sets the minutes to 00
 
-    const day = futureDate.getDate(); // e.g., 12
-    const hour = futureDate.getHours(); // e.g., 10
-    const minute = futureDate.getMinutes(); // e.g., 0
-    const ampm = hour >= 12 ? 'PM' : 'AM'; // determines AM/PM
-    const displayHour = hour % 12 || 12; // convert to 12-hour format (e.g., 13 -> 1)
-    cy.get('input[formcontrolname="sendingDateTime"]').click();
-
-    // Step 3: Select the day
-    cy.get('.mat-calendar-body-cell-content')
-      .contains(new RegExp(`^\\s*${day}\\s*$`))
-      .should('be.visible')
-      .click();
-    // Step 4: Fill in hour
-    cy.get('input[formcontrolname="hour"]')
-      .clear()
-      .type(displayHour.toString().padStart(2, '0'));
-
-    // Step 5: Fill in minutes
-    cy.get('input[formcontrolname="minute"]')
-      .clear()
-      .type(minute.toString().padStart(2, '0'));
-
-    // Step 6: Set AM/PM if needed
-    cy.get('button.mat-stroked-button').then(($btn) => {
-      if (!$btn.text().includes(ampm)) {
-        cy.wrap($btn).click(); // toggle to correct AM/PM
-      }
-    });
-    // Step 7: Confirm the selection
-    cy.get('button mat-icon').contains('done').parents('button').click({ force: true });
-
+    this.selectFutureDateTime();
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
+    cy.wait(500);
+
+    this.step1();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step2();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step3();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
 
-    cy.wait(500)
 
     this.clickSave();
 
@@ -282,38 +229,18 @@ class CampaignPage extends BasePage{
 
   ScheduledToOnspot() {
 
-
-    cy.get('span').contains('Duplicate').click();
-
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`;
-
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
-
+    this.duplicateAndRename();
     cy.get('span').contains('Onspot').click();
-
-
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step1();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step2();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-
+    this.step3();
     cy.wait(500)
 
     this.clickSave();
@@ -322,41 +249,23 @@ class CampaignPage extends BasePage{
 
   CustomToNormal(Mobilenumber) {
 
-
-    cy.get('span').contains('Duplicate').click();
-
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`;
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
-
+    this.duplicateAndRename();
 
     cy.get('span').contains('Normal').click();
-
-
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
     cy.wait(500)
 
 
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step1();
     cy.wait(500)
     this.ContactsTab(Mobilenumber)
 
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+
+    this.step2();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-
+    this.step3();
     cy.wait(500)
 
     this.clickSave();
@@ -365,79 +274,39 @@ class CampaignPage extends BasePage{
 
   NormalToCutom() {
 
-    cy.get('span').contains('Duplicate').click();
-
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-    const newValue = `Campaign-Rand-${randomSuffix}`;
-
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
-
+    this.duplicateAndRename();
 
     cy.get('span').contains('Customized').click();
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
     cy.wait(500)
 
-
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step1();
     cy.wait(500)
     cy.get('#groupsDD > .cuppa-dropdown > .selected-list > .c-btn').click()
     cy.get('#groupsDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(1)').click()
 
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step2();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
-
+    this.step3();
     cy.wait(500)
 
-   this.clickSave();
+    this.clickSave();
 
   }
 
   DuplicateChangeTemp(TemplateName) {
-    cy.get('span').contains('Duplicate').click();
-
-
-    cy.get('mat-dialog-container').should('be.visible')
-
-    cy.contains('button', 'Yes').click()
-    cy.wait(500)
-    // Step: Generate random suffix
-    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase(); // e.g., "A3B9"
-
-    const newValue = `Campaign-Rand-${randomSuffix}`
-
-
-    // Step: Set new campaign name (overwrite completely)
-    cy.get('input[formcontrolname="name"]')
-      .click({ force: true })
-
-      .invoke('val', '')
-      .trigger('input')
-      .type(newValue, { force: true });
-
-
+    this.duplicateAndRename();
 
     cy.get('#cdk-step-label-0-0 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-1 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step1();
     cy.wait(500)
 
-    cy.get('#cdk-step-label-0-2 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step2();
     cy.wait(500)
-
 
     cy.get('#templatesDD .c-btn')
       .should('exist')
@@ -446,26 +315,18 @@ class CampaignPage extends BasePage{
       });
 
     cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > .list-filter > .c-input').should('be.visible').clear().type(TemplateName);
-    // 3️⃣ Wait for the search results and click the matching checkbox
     cy.get('#templatesDD > .cuppa-dropdown > .dropdown-list > .list-area > [style="overflow: auto; max-height: 160px;"] > .lazyContainer > :nth-child(2)', { timeout: 5000 }).click()
-    // 4️⃣ Click the "+ Fill" button
     cy.get('.global-card-form-input > .global-card-form-input-wrapper > .row > .col-md-3 > .btn').click();
-    // 5️⃣ Click "Fill"
+
     cy.contains('button', 'Fill').click({ force: true });
-    cy.scrollTo('bottom'); // Scrolls to bottom of the page
+    cy.scrollTo('bottom');
     cy.get('input[type="file"]').attachFile('TestImage.jpg', { force: true });
 
-
-
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-title').click()
-
-
-    cy.get('#cdk-step-label-0-3 > .mat-step-label > .mat-step-text-label > .d-flex > .step-count').click()
+    this.step3()
+    this.step3()
 
     cy.wait(500)
-
-   this.clickSave();
-
+    this.clickSave();
 
   }
 

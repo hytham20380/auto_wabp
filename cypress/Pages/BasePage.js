@@ -135,18 +135,14 @@ class BasePage {
   }
 
   static generateSMSCampaignData(fixtureData) {
-    // اختار أول campaign من smsCampaigns
     const base = fixtureData.smsCampaigns[0];
 
-    // توليد رقم عشوائي بين 100 و 999
     const randomSuffix = Cypress._.random(100, 999);
 
-    // بناء الأسماء الديناميكية
     const dynamicCampaignName = `${base.CampaignName} ${randomSuffix}`;
     const dynamicScheduleName = `${base.CampaignScheduleName} ${randomSuffix}`;
     const dynamicMobileNumber = `${base.BaseMobileNumber}${randomSuffix}`;
 
-    // اختيار template عشوائي
     const randomTemplate = Cypress._.sample(fixtureData.templateNames);
 
     return {

@@ -16,7 +16,9 @@
   
   "MobileNumber":"01017985099",
   "randomcamp":"Campaign",
-  "tempName":"image"
+  "tempName":"image",
+  "SendingPreferences":["Onspot","Scheduled"],
+  "GroupType":["Normal","Customized"]
 
 
 }
