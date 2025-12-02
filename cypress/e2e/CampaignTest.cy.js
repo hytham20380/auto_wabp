@@ -44,34 +44,44 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
   it('Should Search by the Campaign Title Successfully', function () {
-    CampaignPage.openSearch()
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
     cy.get('.example-element-row > .cdk-column-title').should('contain', this.CampaignData.campaigns[0].CampaignName)
 
   });
 
   it('Should Search by Onspot Sending Type Successfully', function () {
-    CampaignPage.openSearch()
+    BasePage.openSearch();
     CampaignPage.SearchByOnspotCmapaign();
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Onspot')
 
   });
 
   it('Should Search by Scheduled Sending Type Successfully', function () {
-    CampaignPage.openSearch()
+    BasePage.openSearch();
     CampaignPage.SearchByScheduledCmapaign()
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Scheduled')
   });
 
   it('Should Search by Sending Status Successfully', function () {
-    CampaignPage.openSearch()
+    BasePage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
 
   });
 
-  it.only('Should Duplicate The Campaign without any changing ', function () {
-    CampaignPage.openSearch()
+
+  it('Should Clear Successfully', function () {
+    BasePage.openSearch();
+    CampaignPage.SearchByCampaignName(this.CampaignData.campaigns[0].CampaignName);
+    BasePage.clickClear();
+    cy.get('input[data-placeholder="Campaign Title"]').should('have.value', '');
+
+  });
+
+
+  it('Should Duplicate The Campaign without any changing ', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot);
     CampaignPage.DuplicateWithoutChanging();
     cy.wait(500)
@@ -80,8 +90,8 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
 
-  it.only('Should Duplicate the campaign with changing from Custom to Normal ', function () {
-    CampaignPage.openSearch()
+  it('Should Duplicate the campaign with changing from Custom to Normal ', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.CustomOnspot)
     CampaignPage.CustomToNormal(this.CampaignData.MobileNumber)
     cy.wait(500)
@@ -90,8 +100,8 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
 
-  it.only('Should Duplicate the campaign with changing from Normal to Custom ', function () {
-    CampaignPage.openSearch()
+  it('Should Duplicate the campaign with changing from Normal to Custom ', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot)
     CampaignPage.NormalToCutom()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -100,8 +110,8 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
 
-  it.only('Should Duplicate the campaign with changing from onspot to schedual', function () {
-    CampaignPage.openSearch()
+  it('Should Duplicate the campaign with changing from onspot to schedual', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalOnspot)
     CampaignPage.OnspotToScheduled();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -109,8 +119,8 @@ it('Should create Scheduled campaigns Successfully', function () {
 
   });
 
-  it.only('Should Duplicate the campaign with changing from schedual to onspot ', function () {
-    CampaignPage.openSearch()
+  it('Should Duplicate the campaign with changing from schedual to onspot ', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.NormalSchedual)
     CampaignPage.ScheduledToOnspot()
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
@@ -119,8 +129,8 @@ it('Should create Scheduled campaigns Successfully', function () {
   });
 
 
-  it.only('Should Duplicate the campaign with changing The template ', function () {
-    CampaignPage.openSearch()
+  it('Should Duplicate the campaign with changing The template ', function () {
+    BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
     CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')

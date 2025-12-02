@@ -31,10 +31,6 @@ class ClientsChatReport extends BasePage {
 
 
     }
-    Clear() {
-        this.clickClear();
-
-    }
     
     ViewChat() {
         cy.get('.btn-group-actions-list .btn').first().click();

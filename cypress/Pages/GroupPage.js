@@ -1,6 +1,5 @@
 import BasePage from "./BasePage";
 
-
 class GroupPage extends BasePage {
 
   // -------- Navigation --------
@@ -10,9 +9,9 @@ class GroupPage extends BasePage {
 
   // -------- Buttons --------
   clickAdd() {
-    super.clickAddNew();
+    super.clickAddNew();           //super is used to Call the parent constructor, Call a method from the parent class.
+                                       
   }
-
 
   clickAddcontacts() {
     super.clickAddNew();
@@ -36,13 +35,6 @@ class GroupPage extends BasePage {
 
   ClickOnSearchButtonOnGroupPage() {
     super.clickSearch();
-  }
-
-
-
-  openSearch() {
-    super.openSearch();
-
   }
 
   addGroupName(groupName) {
@@ -89,9 +81,6 @@ class GroupPage extends BasePage {
     cy.get('.btn-primary').click();
   }
 
-
-
-
   enterMobilenumber(mobileNumber) {
     cy.get('#phone').clear().type(mobileNumber);
   }
@@ -110,22 +99,11 @@ class GroupPage extends BasePage {
     return cy.get('table'); // You can refine super if you have rows or columns
   }
 
-  clickClearingroupcontactslist() {
-    super.clickClear();
-  }
-
-
   getSearchResults() {
     return cy.get('table');
   }
 
-  deleteContactsfromList() {
-    super.clickDelete();
-  }
-
-  ConfirmdeleteContactsfromList() {
-    super.confirmDialog();
-  }
+  
 
   Clickonfilebutton() {
     cy.contains('button', 'File').click();
@@ -146,31 +124,12 @@ class GroupPage extends BasePage {
 
   }
 
-  ClickClearButtonInFilePege() {
-    super.clickClear();
-
-
-  }
-
+  
   enterfilename(fileName) {
     cy.get('input[formcontrolname="fileName"]').clear().type(fileName);
   }
 
   
-
-  ClickOnDeleteGroupButton() {
-    super.clickDelete();
-
-
-
-  }
-  ClickOnConfirmDeleteGroupButton() {
-    super.confirmDialog();
-  }
-
-
-
-
 
   EnterGroupName(updateName) {
     cy.get('input[formcontrolname="groupName"]').clear().type(updateName);
@@ -183,6 +142,5 @@ class GroupPage extends BasePage {
   getSearchInput() {
     return cy.get('input[formcontrolname="updateName"]');
   }
-
 }
 export default new GroupPage();

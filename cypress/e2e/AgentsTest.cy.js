@@ -23,14 +23,14 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   it('Search by Name', function () {
 
-    AgentsPage.openSearch();
+    BasePage.openSearch();
     AgentsPage.SearchByName(this.AgentsData.FullName);
     cy.get('.mat-row > .cdk-column-adminName').should('contain', this.AgentsData.FullName);
 
   });
 
   it('Search by Email', function () {
-    AgentsPage.openSearch();
+    BasePage.openSearch();
     AgentsPage.SearchByEmail(this.AgentsData.email);
     cy.get('.mat-row > .cdk-column-email').should('contain', this.AgentsData.email);
 
@@ -38,9 +38,11 @@ describe('Agents Page Tests Using Fixtures', () => {
   });
 
   it('Clear', function () {
-    AgentsPage.openSearch();
+    BasePage.openSearch();
+    AgentsPage.SearchByName(this.AgentsData.FullName);
     AgentsPage.SearchByEmail(this.AgentsData.email);
-    AgentsPage.clearButton();
+    BasePage.clickClear();
+    cy.get('input[data-placeholder="Name"]').should('have.value', '');
     cy.get('input[data-placeholder="Email"]').should('have.value', '');
 
   });
@@ -60,7 +62,7 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   it('should Be the user not active ', function () {
 
-    AgentsPage.openSearch();
+    BasePage.openSearch();
     AgentsPage.SearchByName(this.AgentsData.editname);
     cy.wait(1000);
     AgentsPage.changetoNotactive();
@@ -69,7 +71,7 @@ describe('Agents Page Tests Using Fixtures', () => {
 
   it('should Be the user active ', function () {
 
-    AgentsPage.openSearch();
+    BasePage.openSearch();
     AgentsPage.SearchByName(this.AgentsData.editname);
     cy.wait(1000);
     AgentsPage.changetoActive();
@@ -77,9 +79,7 @@ describe('Agents Page Tests Using Fixtures', () => {
   })
 
   it('Delete The agent', function () {
-    AgentsPage.openSearch();
-    AgentsPage.SearchByEmail(this.AgentsData.editemail);
-    AgentsPage.DeleteAgent();
+    BasePage.Delete();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Agent deleted successfully')
   })
 

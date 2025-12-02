@@ -34,26 +34,24 @@ describe('Client Follow-Up Page Tests Using Fixtures', () => {
     })
     it('Should return the related data when search by valid mobile number  ', function () {
         
-        ClientFollowUpPage.SerchByMobileNum(this.ClientFollowUpData.SearchNum)
+        ClientFollowUpPage.SearchByMobileNum(this.ClientFollowUpData.SearchNum)
         cy.get('tbody > :nth-child(1) > .cdk-column-mobileNumber').should('contain', this.ClientFollowUpData.SearchNum);
 
 
     })
     it('Should clear the search successfully  ', function () {
-        ClientFollowUpPage.SerchByMobileNum(this.ClientFollowUpData.SearchNum)
-        ClientFollowUpPage.Clear();
+        ClientFollowUpPage.SearchByMobileNum(this.ClientFollowUpData.SearchNum)
+        BasePage.clickClear();
         cy.get('tbody > :nth-child(1) > .cdk-column-mobileNumber').should('contain', ' ');
 
 
 
     })
+    
     it('Export the data in excel file successfuly  ', function () {
         BasePage.Export('Client Follow Ups');
 
-
     })
-
-
 
 
 });

@@ -28,30 +28,38 @@ describe('Agents Status Page Tests Using Fixtures', () => {
      const dynamicEditName = BasePage.generateDynamicName(this.AgentStatusData.RandomStatus);
 
 
-      AgentStatus.openSearch()
-      AgentStatus.SerchByName(this.AgentStatusData.RandomStatus)
+      BasePage.openSearch();
+      AgentStatus.SearchByName(this.AgentStatusData.RandomStatus)
       AgentStatus.EditStatus(dynamicEditName)
       cy.get('.mat-simple-snack-bar-content').should('contain', 'The agent status has been updated successfully.');
     
   })
 
   it('Should Search By status name Sucessfully ', function () {
-    AgentStatus.openSearch()
-    AgentStatus.SerchByName(this.AgentStatusData.EditStatus)
+    BasePage.openSearch();
+    AgentStatus.SearchByName(this.AgentStatusData.EditStatus)
     cy.get('td.mat-column-statusName').contains(this.AgentStatusData.EditStatus).should('be.visible');
 
   })
   it('Should Search By Active status  Sucessfully ', function () {
-    AgentStatus.openSearch()
+    BasePage.openSearch();
     AgentStatus.SearchByActiveStatus()
     cy.get('td.mat-column-parentName').contains('Active').should('be.visible');
 
 
   })
   it('Should Search By Inactive status Sucessfully ', function () {
-    AgentStatus.openSearch()
+    BasePage.openSearch();
     AgentStatus.SearchByInActiveStatus()
     cy.get('td.mat-column-parentName').contains('Inactive').should('be.visible');
+
+  })
+
+  it('Should Clear the search Successfully ', function () {
+    BasePage.openSearch();
+    AgentStatus.SearchByName(this.AgentStatusData.EditStatus)
+    BasePage.clickClear();
+    cy.get('input[data-placeholder="Name"]').should('have.value', '');
 
   })
 
@@ -63,19 +71,16 @@ describe('Agents Status Page Tests Using Fixtures', () => {
   })
   it('Delete Status That set before and not allowed to delete ', function () {
     AgentStatus.SetInActiveStatus()
-    AgentStatus.openSearch()
-    AgentStatus.SerchByName(this.AgentStatusData.InActiveStatus)
-    AgentStatus.DeleteStatus();
+    BasePage.openSearch();
+    AgentStatus.SearchByName(this.AgentStatusData.InActiveStatus)
+    BasePage.Delete();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Cannot delete status as it exists in agents\' history.');
 
 
   })
 
   it('Delete Status Successfully ', function () {
-    AgentStatus.SetInActiveStatus()
-    AgentStatus.openSearch()
-    AgentStatus.SerchByName(this.AgentStatusData.RandomStatus)
-    AgentStatus.DeleteStatus();
+    BasePage.Delete();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'The agent status has been deleted successfully.');
 
 

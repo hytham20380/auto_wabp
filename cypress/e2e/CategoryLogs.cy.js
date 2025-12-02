@@ -18,16 +18,16 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('2️⃣ Should search by name and display results', function () {
-    CategoryLogsPage.openSearch();
+    BasePage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
     CategoryLogsPage.clickSearch();
     CategoryLogsPage.getSearchResults().should('contain', this.categoryLogsData.searchName);
   });
 
   it('3️⃣ Should clear the search field', function () {
-    CategoryLogsPage.openSearch();
+    BasePage.openSearch();
     CategoryLogsPage.enterSearchName(this.categoryLogsData.searchName);
-    CategoryLogsPage.clickClear();
+    BasePage.clickClear();
     CategoryLogsPage.getSearchInput().should('have.value', '');
   });
 
@@ -40,8 +40,7 @@ describe('Category Logs Page Tests', () => {
   });
 
   it('5️⃣ Should delete the first category log', () => {
-    CategoryLogsPage.clickDeleteFirst();
-    CategoryLogsPage.confirmDelete();
+    BasePage.Delete();
     cy.wait(500); // Optional: give time for delete to reflect
   });
 });

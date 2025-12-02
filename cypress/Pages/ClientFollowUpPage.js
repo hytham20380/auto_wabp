@@ -19,20 +19,12 @@ class ClientFollowUp extends BasePage {
         cy.contains('span', 'send').click();
 
     }
-    openSearch() {
-        this.openSearch();
-    }
-
-    SerchByMobileNum(MobileNumber) {
+   
+    SearchByMobileNum(MobileNumber) {
         cy.get('#phone').type(MobileNumber);
         this.clickSearch();    
     }
      
-    Clear() {
-         this.clickClear();
-
-    }
-
 
     ValidationMessages() {
         cy.contains('span', 'Send Message').click();

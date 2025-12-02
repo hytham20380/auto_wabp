@@ -5,11 +5,6 @@ class CategoryLogsPage extends BasePage {
     cy.get('span.nav-link-text').contains('Log Category Type').click();
   }            
 
-openSearch() {
-    super.openSearch();
-  }
-
-
   getSearchInput() {
     return cy.get('input[formcontrolname="categoryLogName"]');
   }
@@ -19,11 +14,7 @@ openSearch() {
   }
 
   clickSearch() {
-    super.clickSearch();
-  }
-
-  clickClear() {
-    super.clickClear();
+    super.clickSearch();        //super is used to Call the parent constructor, Call a method from the parent class.
   }
 
   getSearchResults() {
@@ -51,15 +42,7 @@ openSearch() {
     });
   }
 
-  clickDeleteFirst() {
-    cy.get('table tbody tr').first().within(() => {
-      super.clickDelete(); // Adjust if icon
-    });
-  }
 
-  confirmDelete() {
-    super.confirmDialog();
-  }
 }
 
 export default new CategoryLogsPage();

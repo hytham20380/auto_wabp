@@ -7,7 +7,7 @@ class SMSTemplate extends BasePage {
     }
 
     AddNewTemplate(Name, Body) {
-        super.clickCreate();
+        super.clickCreate();            //super is used to Call the parent constructor, Call a method from the parent class.
         cy.get('.mat-form-field-flex').type(Name)
         cy.get('span').contains('Select Channel').click();
         cy.get('.pure-checkbox > label').click()
@@ -18,10 +18,7 @@ class SMSTemplate extends BasePage {
 
 
     }
-    openSearch() {
-        super.openSearch();
-    }
-
+   
     SearchByName(Name) {
         cy.get('input[formcontrolname="templateName"]').type(Name);
         super.clickSearch();
@@ -44,12 +41,7 @@ class SMSTemplate extends BasePage {
 
 
     }
-    Clear() {
-
-        super.clickClear();
-
-    }
-
+    
     ChangeToNotAvailable() {
         // استهداف أول صف في الجدول - عمود Availability
         cy.get('table tbody tr')

@@ -45,19 +45,13 @@ class AgentsPage extends BasePage {
 
   // ----------------- Search -----------------
   SearchByName(Name) {
-    this.openSearch();
     cy.get('input[data-placeholder="Name"]').type(Name);
     this.clickSearch();
   }
 
   SearchByEmail(Email) {
-    this.openSearch();
     cy.get('input[data-placeholder="Email"]').type(Email);
     this.clickSearch();
-  }
-
-  clearButton() {
-    this.clickClear();
   }
 
 
@@ -76,24 +70,24 @@ class AgentsPage extends BasePage {
 
   // ----------------- Activate / Inactive -----------------
   changetoNotactive() {
-    cy.contains('Active').click();
-    this.confirmDialog();
-  }
+        cy.wait(1000);
 
-  changetoActive() {
-    cy.contains('Not Active').click();
-    this.confirmDialog();
-  }
+        cy.contains('span.mat-slide-toggle-content', 'Active').should('be.visible').click();
 
 
-  // ----------------- Delete -----------------
-  DeleteAgent() {
-    this.clickDelete();
-    this.confirmDialog();
-  }
+        cy.get('#mat-dialog-title-0').should('be.visible');
+        cy.get('.mat-dialog-actions > .btn-black').click()
+
+    }
+    changetoActive() {
+        cy.wait(1000);
+
+        cy.contains('span.mat-slide-toggle-content', 'Not Active').should('be.visible').click();
+
+        cy.get('#mat-dialog-title-0').should('be.visible');
+        cy.get('.mat-dialog-actions > .btn-black').click()
 
 
-  
 }
-
+}
 export default new AgentsPage();

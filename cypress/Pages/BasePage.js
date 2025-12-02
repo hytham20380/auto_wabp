@@ -17,17 +17,19 @@ class BasePage {
     this.elements.searchBtn().click();
   }
 
-  clickClear() {
-    this.elements.clearBtn().click();
+   static clickClear() {
+    cy.contains('span', 'Clear').click();
   }
 
   clickEdit() {
     this.elements.editBtn().click();
   }
 
-  clickDelete() {
-    this.elements.deleteBtn().click();
-  }
+   static Delete() {
+           cy.contains('span', 'Delete').first().click();
+           cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
+           cy.get('.mat-dialog-actions > .btn-black').click();
+            }
 
   clickAddNew() {
     this.elements.addNewBtn({ timeout: 10000 }).click();
@@ -42,6 +44,11 @@ class BasePage {
   }
 
 
+  ActivationToggle() {
+    this.elements.saveBtn().click();
+  }
+
+
   static Export(pageName) {
       cy.get('button[title="Export To Excel"]').click();
    
@@ -51,9 +58,9 @@ class BasePage {
     
         cy.readFile(`cypress/downloads/${downloadedFilename}`, { timeout: 5000 }).should('exist')
       
-  }
+  } 
 
-  openSearch() {
+  static openSearch() {
     cy.get('div.search-form-expand-wrapper').then($wrapper => {
       const isVisible = $wrapper.css('opacity') === '1';
       if (!isVisible) {
@@ -64,11 +71,6 @@ class BasePage {
     });
   }
 
-  confirmDialog() {
-
-    cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
-    cy.get('.mat-dialog-actions > .btn-black').click();
-  }
 
   static init(PageName, fixtureName) {
 

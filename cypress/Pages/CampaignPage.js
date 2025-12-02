@@ -159,9 +159,6 @@ class CampaignPage extends BasePage {
     this.clickSearch();
   }
 
-  openSearch() {
-    super.openSearch();
-  }
 
   duplicateAndRename() {
     cy.contains('Duplicate').click();

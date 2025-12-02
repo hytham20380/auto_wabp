@@ -23,7 +23,7 @@ describe('Pre Message Page Tests', () => {
   });
 
   it('Should search by Message and display results', function () {
-    PreMessagePage.openSearch();
+    BasePage.openSearch();
     PreMessagePage.enterSearchMessage(this.PreMessageData.editedMessage.Message);
     PreMessagePage.clickSearch();
     PreMessagePage.getSearchResults().should('contain.text', this.PreMessageData.editedMessage.Message);
@@ -31,16 +31,15 @@ describe('Pre Message Page Tests', () => {
   });
 
   it('Should clear the search field', function () {
-    PreMessagePage.openSearch();
+    BasePage.openSearch();
     PreMessagePage.enterSearchMessage(this.PreMessageData.searchMessage);
-    PreMessagePage.clickClear();
+    BasePage.clickClear();
     PreMessagePage.getSearchInput().should('have.value', '');
   });
 
   
   it('Should delete the first Message', () => {
-    PreMessagePage.clickDeleteFirst();
-    PreMessagePage.confirmDelete();
+    BasePage.Delete();
     cy.wait(500); // Optional: give time for delete to reflect
   });
   

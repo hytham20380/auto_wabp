@@ -19,17 +19,13 @@ class TeamsPage extends BasePage {
 
     cy.get('.c-btn').click({ force: true });                // opens the dropdown
     cy.get('.lazyContainer > :nth-child(2)').click();
-    
+
 
 
   }
 
   clickSearch() {
-    super.clickSearch();
-  }
-
-  clickClear() {
-    super.clickClear();
+    super.clickSearch();         //super is used to Call the parent constructor, Call a method from the parent class.
   }
 
   getSearchResults() {
@@ -41,7 +37,7 @@ class TeamsPage extends BasePage {
   }
 
   clickEdit() {
-     super.clickEdit();
+    super.clickEdit();
   }
 
   clickDelete() {
@@ -59,14 +55,6 @@ class TeamsPage extends BasePage {
   assertNoResults() {
     cy.contains('No teams found').should('exist');
   }
-
-
-  openSearch() {
-    super.openSearch();
-
-  }
-
-
 
 }
 
