@@ -11,3 +11,4 @@ cypress:
     paths:
       - cypress/videos
       - cypress/screenshots
+

@@ -8,6 +8,7 @@ pipelines:
         script:
           - npm ci
           - npx cypress run --browser chrome
-        artifacts:
+        artifacts: 
           - cypress/videos/**
           - cypress/screenshots/**
+
