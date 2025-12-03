@@ -1,0 +1,10 @@
+pipelines:
+  default:
+    - step:
+        name: Cypress Tests
+        image: cypress/base:18
+        caches:
+          - node
+        script:
+          - npm ci
+          - npx cypress run
