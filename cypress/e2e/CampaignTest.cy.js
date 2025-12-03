@@ -64,7 +64,7 @@ it('Should create Scheduled campaigns Successfully', function () {
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Scheduled')
   });
 
-  it.only('Should Search by Sending Status Successfully', function () {
+  it('Should Search by Sending Status Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
@@ -134,12 +134,26 @@ it('Should create Scheduled campaigns Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchByCampaignName(this.CampaignData.randomcamp)
     CampaignPage.DuplicateChangeTemp(this.CampaignData.tempName)
+    cy.wait(500);
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Created Successfully')
 
 
   });
+  it.only('Should View Campaign  Successfully', function () {
 
+    CampaignPage.ViewCampaign();
+    cy.url().should('include', '/campaigns/report');
+  });
+  it.only('Should Details Campaign  Successfully', function () {
 
+    CampaignPage.DetailsCampaign();
+    cy.url().should('include', '/campaigns/view');
+
+  });
+  it.only('Should cancel Scheduled  Campaign  Successfully', function () {
+    CampaignPage.CancelSchadualedCampaign();
+    cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Cancelled Successfully');
+  });
 });
 
 
