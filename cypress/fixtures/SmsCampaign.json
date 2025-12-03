@@ -13,7 +13,10 @@
   "NormalSchedual":"Normal SMS Camp schedualed",
   "CustomSchedual":"Custom SMS Camp Schedualed",
   "randomcamp":"retest camp",
-  "MobileNumber":"01273196467"
+  "MobileNumber":"01273196467",
+  "SendingPreferences":["Onspot","Scheduled"],
+  "GroupType":["Normal","Customized"]
+
   
 
 }
