@@ -6,7 +6,8 @@ describe('Campaign Page Tests Using Fixtures', () => {
 
   BasePage.init(CampaignPage, 'CampaignData');
 
-  it('Should create Onspot Normal campaigns Successfully', function () {
+  it('Should create Onspot with Normal group Successfully', function () {
+
 
     const data = BasePage.generateCampaignData(this.CampaignData);
     const SendingPreferences = this.CampaignData.SendingPreferences[0];
@@ -63,7 +64,7 @@ it('Should create Scheduled campaigns Successfully', function () {
     cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Scheduled')
   });
 
-  it('Should Search by Sending Status Successfully', function () {
+  it.only('Should Search by Sending Status Successfully', function () {
     BasePage.openSearch();
     CampaignPage.SearchBySendingStatus();
     cy.get('.example-element-row > .cdk-column-sendingStatus').should('contain', 'Sent')
