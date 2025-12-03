@@ -1,0 +1,13 @@
+stages:
+  - test
+
+cypress:
+  stage: test
+  image: cypress/base:18
+  script:
+    - npm ci
+    - npx cypress run
+  artifacts:
+    paths:
+      - cypress/videos
+      - cypress/screenshots
