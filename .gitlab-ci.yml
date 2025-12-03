@@ -4,6 +4,7 @@ cypress:
   script:
     - npm ci
     - xvfb-run -a npx cypress run --browser chrome --headed --spec "cypress/e2e/AgentStatusTest.cy.js"
+
   artifacts:
     paths:
       - cypress/videos

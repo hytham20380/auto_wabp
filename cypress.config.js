@@ -9,7 +9,6 @@ module.exports = defineConfig({
     },
 
     downloadsFolder: "cypress/Downloads/",
-    experimentalSessionAndOrigin: true,
 
     retries: {
       runMode: 3,  // retry failed tests 3 times in "cypress run"
