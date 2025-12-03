@@ -1,14 +1,10 @@
-stages:
-  - test
-
 cypress:
   stage: test
-  image: cypress/browsers:node18.16.0-chrome118-ff120  # Node + Chrome + Firefox
+  image: cypress/browsers:node18.16.0-chrome118-ff120
   script:
     - npm ci
-    - npx cypress run --browser chrome
+    - xvfb-run -a npx cypress run --browser chrome --headed --spec "cypress/e2e/AgentStatusTest.cy.js"
   artifacts:
     paths:
       - cypress/videos
       - cypress/screenshots
-
