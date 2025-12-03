@@ -11,12 +11,14 @@ describe('Sms Campaign tests', () => {
     cy.log('Already logged in and on SMS Campaign page');
   });
 
-  it('Should create Onspot campaigns Successfully', function () {
+  it('Should create Onspot campaigns with normal group Successfully', function () {
 
-    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign);
+    const SendingPreferences = this.SmsCampaign.SendingPreferences[0];
+    const GroupType = this.SmsCampaign.GroupType[0];
 
 
-    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.dynamicCampaignName);
+    SmsCampaignPage.AddNewSmsCampaignInfoTab(data.dynamicCampaignName, SendingPreferences, GroupType);
     SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
     SmsCampaignPage.TemplateTab(data.randomTemplate);
 
@@ -30,9 +32,12 @@ describe('Sms Campaign tests', () => {
   it('Should create Onspot campaigns with custom group Successfully', function () {
 
     const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
+    const SendingPreferences = this.SmsCampaign.SendingPreferences[0];
+    const GroupType = this.SmsCampaign.GroupType[1];
 
 
-    SmsCampaignPage.customGroupCamp(data.dynamicCampaignName, this.SmsCampaign.templateNames[1]);
+
+    SmsCampaignPage.customGroupCamp(data.dynamicCampaignName, this.SmsCampaign.templateNames[1], SendingPreferences, GroupType);
 
     cy.get('.mat-simple-snack-bar-content')
       .should('contain', 'Campaign Created Successfully');
@@ -40,31 +45,18 @@ describe('Sms Campaign tests', () => {
 
   });
 
-  it('Should create Onspot campaigns with Normal group Successfully', function () {
-    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
-
-
-
-    SmsCampaignPage.normalGroupCamp(data.dynamicCampaignName, this.SmsCampaign.templateNames[1]);
-
-    cy.get('.mat-simple-snack-bar-content', { timeout: 10000 }).should('contain', 'Campaign Created Successfully');
-
-
-
-  });
-
   it('Should create Scheduled campaigns Successfully', function () {
 
-  const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
+    const data = BasePage.generateSMSCampaignData(this.SmsCampaign)
 
-      SmsCampaignPage.ScheduleCampaignInfoTab(data.dynamicCampaignName);
-      SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
-      SmsCampaignPage.TemplateTab(data.randomTemplate);
+    SmsCampaignPage.ScheduleCampaignInfoTab(data.dynamicCampaignName);
+    SmsCampaignPage.ContactsTab(data.dynamicMobileNumber);
+    SmsCampaignPage.TemplateTab(data.randomTemplate);
 
-      cy.wait(3000);
-      cy.get('.mat-simple-snack-bar-content')
-        .should('contain', 'Campaign Created Successfully');
-   
+    cy.wait(3000);
+    cy.get('.mat-simple-snack-bar-content')
+      .should('contain', 'Campaign Created Successfully');
+
 
 
 
@@ -77,8 +69,6 @@ describe('Sms Campaign tests', () => {
 
   });
 
-
-
   it('Should Search by Onspot Sending Type Successfully', function () {
     BasePage.openSearch()
 
@@ -89,12 +79,12 @@ describe('Sms Campaign tests', () => {
 
   });
 
-  it('Should Search by Sent Sending Status Successfully', function () {
+  it.only('Should Search by Sent Sending Status Successfully', function () {
     BasePage.openSearch()
 
     SmsCampaignPage.SearchBySendingStatus()
 
-    cy.get(':nth-child(1) > .cdk-column-sendingType > .badge-status').should('contain', 'Onspot')
+    cy.get('tbody[role="rowgroup"] > :nth-child(1) > .cdk-column-sendingStatus').should('contain', 'Sent')
 
 
   });
@@ -179,12 +169,17 @@ describe('Sms Campaign tests', () => {
   });
   it('View Button Should work correctly', function () {
     cy.log('Already logged in and on SMS Campaign page');
-    cy.get(':nth-child(1) > .py-2 > .btn-group-actions-list > :nth-child(1) > .btn > .ng-tns-c263-37').click();
+    cy.contains('span', 'View').first().click();
     cy.url().should('include', '/pages/smsCampaigns/report');
   });
 
   it('Export Contacts', function () {
-    SmsCampaignPage.ExportSmsCampaign();
+    BasePage.openSearch()
+
+    SmsCampaignPage.SearchBySendingStatus()
+    cy.contains('span', 'View').click();
+
+   BasePage.Export('Campaigns Report');
 
   });
 

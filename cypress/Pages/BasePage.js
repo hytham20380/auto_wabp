@@ -127,10 +127,10 @@ class BasePage {
   }
 
   static generateDynamicName(baseName) {
-    // توليد random number بين 100 و 999
+
     const randomSuffix = Cypress._.random(100, 999);
 
-    // اسم ديناميكي
+  
     const dynamicName = `${baseName} ${randomSuffix}`;
 
     return dynamicName;
