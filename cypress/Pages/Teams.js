@@ -12,16 +12,14 @@ class TeamsPage extends BasePage {
   selectWorkingType() {
     // Assuming a mat-select is used, update this based on your actual UI
     cy.get('#mat-select-value-1').click();
-    cy.get('.mat-option-text').contains("24/7").click();
+    cy.get('.mat-option-text').contains("Custom").click();
   }
 
   updateWorkingType() {
 
     cy.get('.c-btn').click({ force: true });                // opens the dropdown
-    cy.get('.lazyContainer > :nth-child(2)').click();
-
-
-
+    cy.get('.lazyContainer > :nth-child(1)').click();
+              // selects "Holiday" option
   }
 
   clickSearch() {
@@ -48,8 +46,8 @@ class TeamsPage extends BasePage {
     super.clickSave();
   }
 
-  assertTeamVisible(teamName) {
-    cy.contains(teamName).should('exist');
+  assertTeamVisible(newName) {
+    cy.contains(newName).should('exist');
   }
 
   assertNoResults() {

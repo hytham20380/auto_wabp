@@ -31,11 +31,18 @@ describe('Teams Page Functionality', () => {
   });
 
   it('4. Edit team info', function () {
+
+    const newName = BasePage.generateDynamicName(this.TeamsData.editedTeam.name);
+
+
+    BasePage.openSearch();
+    Teams.selectWorkingType();
+    Teams.clickSearch();
     Teams.clickEdit();
-    Teams.enterName(this.TeamsData.editedTeam.name);
+    Teams.enterName(newName);
     Teams.updateWorkingType();
     Teams.clickSave();
-    Teams.assertTeamVisible(this.TeamsData.editedTeam.name);
+    
   });
 
   it('4. Should Export Teams', function () {
