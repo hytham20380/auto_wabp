@@ -44,7 +44,7 @@ it('Should Export the data successfully ',function(){
     BasePage.Export('Slot');
 
 });
-it('Should search by club successfully', function () {
+it('Should Clear the search successfully', function () {
 
     const selectedClub = SlotsPage.SearchByClub();
     BasePage.clickClear();
@@ -52,9 +52,6 @@ it('Should search by club successfully', function () {
 
 
 });
-
-
-
 
 
 

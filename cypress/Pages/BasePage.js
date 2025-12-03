@@ -49,8 +49,16 @@ class BasePage {
   }
 
 
+  confirmDialog() {
+
+    cy.get('.mat-dialog-container', { timeout: 8000 }).should('be.visible');
+    cy.get('.mat-dialog-actions > .btn-black').click();
+  }
+
+
   static Export(pageName) {
       cy.get('button[title="Export To Excel"]').click();
+      cy.wait(5000); // Wait for the export to complete
    
         // Wait for the file to be downloaded
         const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');

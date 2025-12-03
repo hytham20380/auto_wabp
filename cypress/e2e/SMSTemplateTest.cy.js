@@ -72,7 +72,7 @@ describe('Shpuld Add New SMS Template Successfully  ', () => {
   })
 
   it('Should Export templates successfully', function () {
-    SMSTemplatePage.ExportTemplate();
+    BasePage.Export('Sms Templates Report');
 
   })
 
