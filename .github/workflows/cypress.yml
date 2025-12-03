@@ -2,7 +2,7 @@ name: Run Cypress Tests
 
 on:
   push:
-    branches: 
+    branches:
       - Dev
       - main
   pull_request:
@@ -21,7 +21,11 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Cypress tests
-        run: npx cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          headless: true
+          record: false
