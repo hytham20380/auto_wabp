@@ -338,10 +338,11 @@ class CampaignPage extends BasePage {
 
   }
   CancelSchadualedCampaign() {
+   
     this.SearchByScheduledCmapaign();
     this.ViewCampaign();
     cy.contains('span', 'Cancel').click();
-    this.clickConfirm();
+    this.confirmDialog();
 
 
   }

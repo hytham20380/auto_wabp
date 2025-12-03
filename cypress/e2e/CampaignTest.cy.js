@@ -139,18 +139,19 @@ it('Should create Scheduled campaigns Successfully', function () {
 
 
   });
-  it.only('Should View Campaign  Successfully', function () {
+  it('Should View Campaign  Successfully', function () {
 
     CampaignPage.ViewCampaign();
     cy.url().should('include', '/campaigns/report');
   });
-  it.only('Should Details Campaign  Successfully', function () {
+  it('Should Details Campaign  Successfully', function () {
 
     CampaignPage.DetailsCampaign();
     cy.url().should('include', '/campaigns/view');
 
   });
-  it.only('Should cancel Scheduled  Campaign  Successfully', function () {
+  it('Should cancel Scheduled  Campaign  Successfully', function () {
+    BasePage.openSearch();
     CampaignPage.CancelSchadualedCampaign();
     cy.get('.mat-simple-snack-bar-content').should('contain', 'Campaign Cancelled Successfully');
   });
