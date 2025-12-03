@@ -11,9 +11,14 @@ module.exports = defineConfig({
     downloadsFolder: "cypress/Downloads/",
     experimentalSessionAndOrigin: true,
 
-    retries: { 
+    retries: {
       runMode: 3,  // retry failed tests 3 times in "cypress run"
       openMode: 3  // no retries in "cypress open"
-    }
+    },
+
+    defaultCommandTimeout: 10000,
+    pageLoadTimeout: 60000
   },
+
+  
 });
