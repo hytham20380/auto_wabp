@@ -24,7 +24,6 @@ steps:
 
   # 3️⃣ Run all Cypress tests inside auto_wabp
   - script: |
-      cd auto_wabp
       export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage"
       echo "Running all Cypress tests..."
       npx cypress run \
@@ -33,15 +32,16 @@ steps:
         --reporter mocha-junit-reporter \
         --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
     displayName: 'Run all Cypress Tests'
+    workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
 
-  # 4️⃣ Debug folder structure inside auto_wabp (optional)
+  # 4️⃣ Debug folder structure (optional)
   - script: |
-      cd auto_wabp
       echo "=== Listing Cypress folder ==="
       ls -R cypress || echo "cypress folder not found"
       echo "=== Listing results folder ==="
       ls -R results || echo "results folder not found"
     displayName: 'Debug Cypress output'
+    workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
 
   # 5️⃣ Publish JUnit test results
   - task: PublishTestResults@2
