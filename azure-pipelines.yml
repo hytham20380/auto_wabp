@@ -6,6 +6,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  CYPRESS_VIDEO: true
+  CYPRESS_SCREENSHOT_ON_FAILURE: true
+
 steps:
   # 1️⃣ Install Node.js
   - task: NodeTool@0
@@ -17,34 +21,16 @@ steps:
   - script: npm ci
     displayName: 'Install dependencies'
 
-  # 3️⃣ Run Cypress specs sequentially by folder
+  # 3️⃣ Run all Cypress tests
   - script: |
       export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage"
-
-      echo "Running Login tests..."
+      echo "Running all Cypress tests..."
       npx cypress run \
         --browser chrome \
         --headless \
-        --spec "cypress/e2e/login/*.cy.js" \
-        --reporter spec \
-        --reporter-options "mochaFile=results/login-[hash].xml,toConsole=true"
-
-      echo "Running Agent tests..."
-      npx cypress run \
-        --browser chrome \
-        --headless \
-        --spec "cypress/e2e/agents/*.cy.js" \
-        --reporter spec \
-        --reporter-options "mochaFile=results/agents-[hash].xml,toConsole=true"
-
-      echo "Running Campaign tests..."
-      npx cypress run \
-        --browser chrome \
-        --headless \
-        --spec "cypress/e2e/campaign/*.cy.js" \
-        --reporter spec \
-        --reporter-options "mochaFile=results/campaign-[hash].xml,toConsole=true"
-    displayName: 'Run Cypress Tests Sequentially'
+        --reporter mocha-junit-reporter \
+        --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
+    displayName: 'Run all Cypress Tests'
 
   # 4️⃣ Debug folder structure (optional)
   - script: |
@@ -54,7 +40,7 @@ steps:
       ls -R results || echo "results folder not found"
     displayName: 'Debug Cypress output'
 
-  # 5️⃣ Publish JUnit test results to Tests tab
+  # 5️⃣ Publish JUnit test results
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
@@ -77,3 +63,4 @@ steps:
       PathtoPublish: 'cypress/videos'
       ArtifactName: 'videos'
       publishLocation: 'Container'
+s
