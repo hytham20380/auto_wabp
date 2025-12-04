@@ -32,7 +32,7 @@ steps:
         --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
     displayName: 'Run all Cypress Tests'
 
-  # 4️⃣ Debug folder structure (optional)
+  # 4️⃣ Debug folder structure
   - script: |
       echo "=== Listing Cypress folder ==="
       ls -R cypress || echo "cypress folder not found"
@@ -54,4 +54,12 @@ steps:
     inputs:
       PathtoPublish: 'cypress/screenshots'
       ArtifactName: 'screenshots'
-      publishLocat
+      publishLocation: 'Container'
+
+  # 7️⃣ Publish videos
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    inputs:
+      PathtoPublish: 'cypress/videos'
+      ArtifactName: 'videos'
+      publishLocation: 'Container'
