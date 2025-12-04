@@ -54,13 +54,4 @@ steps:
     inputs:
       PathtoPublish: 'cypress/screenshots'
       ArtifactName: 'screenshots'
-      publishLocation: 'Container'
-
-  # 7️⃣ Publish videos
-  - task: PublishBuildArtifacts@1
-    condition: succeededOrFailed()
-    inputs:
-      PathtoPublish: 'cypress/videos'
-      ArtifactName: 'videos'
-      publishLocation: 'Container'
-s
+      publishLocat
