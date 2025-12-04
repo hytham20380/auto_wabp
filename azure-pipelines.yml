@@ -11,7 +11,7 @@ variables:
   CYPRESS_SCREENSHOT_ON_FAILURE: true
 
 steps:
-  # 1️⃣ Checkout the code including submodules
+  # 1️⃣ Checkout code including submodules
   - checkout: self
     submodules: true
     clean: true
@@ -24,10 +24,15 @@ steps:
 
   # 3️⃣ Install dependencies
   - script: npm ci
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'Install dependencies'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-  # 4️⃣ Run all Cypress tests
+  # 4️⃣ Ensure mocha-junit-reporter is installed
+  - script: npm install --no-save mocha-junit-reporter
+    displayName: 'Ensure mocha-junit-reporter is installed'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+  # 5️⃣ Run all Cypress tests
   - script: |
       export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage"
       echo "Running all Cypress tests..."
@@ -36,19 +41,19 @@ steps:
         --headless \
         --reporter mocha-junit-reporter \
         --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'Run all Cypress Tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-  # 5️⃣ Debug folder structure (optional)
+  # 6️⃣ Debug folder structure (optional)
   - script: |
       echo "=== Listing Cypress folder ==="
       ls -R cypress || echo "cypress folder not found"
       echo "=== Listing results folder ==="
       ls -R results || echo "results folder not found"
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'Debug Cypress output'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-  # 6️⃣ Publish JUnit test results
+  # 7️⃣ Publish JUnit test results
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
@@ -56,7 +61,7 @@ steps:
       mergeTestResults: true
       testRunTitle: 'Cypress Tests'
 
-  # 7️⃣ Publish screenshots
+  # 8️⃣ Publish screenshots
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
@@ -64,7 +69,7 @@ steps:
       ArtifactName: 'screenshots'
       publishLocation: 'Container'
 
-  # 8️⃣ Publish videos
+  # 9️⃣ Publish videos
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
