@@ -1,0 +1,87 @@
+   >> to push to other git account 
+
+git remote -v 
+git remote remove origin
+git remote add origin https://github.com/hytham20380/auto_wabp.git
+git remote add origin https://github.com/ranamagdy/auto_wabp.git  
+
+git branch
+git add .
+git commit -m "add github actions"
+git push -u origin Dev
+
+-------------
+to push from git to other git 
+
+✅ Correct approach
+
+Since you don’t have permission to push to the original repo, you should:
+
+Push to your own fork (your GitHub account)
+
+Optionally, create a pull request to the original repo if you want to contribute.
+
+🔹 Step 1: Add your fork as origin
+
+Assuming your fork is:
+
+https://github.com/hytham20380/auto_wabp.git
+
+
+Run:
+
+git remote add origin https://github.com/hytham20380/auto_wabp.git
+
+
+Check remotes:
+
+git remote -v
+
+
+You should now see:
+
+origin    https://github.com/hytham20380/auto_wabp.git (fetch)
+origin    https://github.com/hytham20380/auto_wabp.git (push)
+upstream  https://github.com/ranamagdy/auto_wabp.git (fetch)
+upstream  https://github.com/ranamagdy/auto_wabp.git (push)
+
+🔹 Step 2: Push your branch to your fork
+git push -u origin Dev
+
+
+-u sets your local Dev branch to track origin/Dev
+
+After this, you can just do git push in future
+
+🔹 Step 3: Create a Pull Request (optional)
+
+If you want to contribute to the original repo:
+
+Go to your fork on GitHub (https://github.com/hytham20380/auto_wabp)
+
+Click Compare & pull request
+
+Submit a PR to ranamagdy/auto_wabp
+
+-------------
+2️⃣ Check GitHub Actions / status checks
+
+Go to Actions tab or PR page
+
+Make sure all required tests pass (e.g., Cypress workflow)
+
+Some repos block merging until CI passes
+
+3️⃣ Request a review (if needed)
+
+On the PR page, click Reviewers → add a collaborator from the original repo
+
+Wait for approval if branch protection requires it
+
+4️⃣ Once all requirements are met
+
+GitHub will enable the Merge button
+
+Then you can merge your changes into Dev on Rana’s repo
+
+If you want, I can give you a step-by-step sequence to safely sync your branch with upstream Dev, push it, and unblock the PR for merging.

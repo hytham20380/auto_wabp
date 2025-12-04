@@ -1,0 +1,21 @@
+# to push first time to git repoistory:
+git init
+git add .
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/hytham20380/CFC_BE.git
+git push -u origin master
+
+
+------------------------------------------------------------------------------
+# to push to already existing repo:
+
+
+cd "D:\Automation projects\Automation projects\WABP\auto_wabp"
+
+git init                             # Initialize Git repository
+git add .                            # Stage all files
+git commit -m "Initial commit"       # First commit
+git branch -M main                   # Rename current branch to main
+git remote add origin https://github.com/ranamagdy/auto_wabp.git  
+git push -u origin main              # Push and set upstream

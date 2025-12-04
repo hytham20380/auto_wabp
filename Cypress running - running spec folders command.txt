@@ -1,0 +1,45 @@
+to run any spec open cypress dashboard run commands: 
+"CTL C" () to close runner
+"npx cypress open" and select any spec you want to run
+
+**************
+
+npx cypress run --browser chrome --spec "cypress\e2e\AhlwayScripts\ahlwayLogin.cy.js,cypress\e2e\AhlwayScripts\solveQuestions.cy.js"
+--------------------------------------------------------------------------------------------------------------------------------
+command to run spec folder in cmd:
+to clear cache :
+"npm cache clean --force"
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+command to run spec folder in cmd:
+
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManageAdmins/AddAdmin.cy.js"
+
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManageAdmins.cy.js,cypress/e2e/cfc/ManagePlatform.cy.js,cypress/e2e/cfc/ManageClient.cy.js"
+                          ------         ---------------------------- ------------------------------ 
+                           ||                       ||                                ||
+                           ||                       ||                                ||  
+                           \/                       \/                                \/
+                      browser name     path to manage admin spec folder      path to manage platform spec folder
+
+
+can add as many folder as you want on between the double quotes only need to be sperated by comma
+
+
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManageClient/ManageClient.cy.js"
+
+
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManagePlatform/ManageSLA.cy.js"
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManageTickets/CreateTicket.cy.js"
+
+npx cypress run --browser chrome --spec "cypress/e2e/cfc/ManageTickets/CreateTicket.cy.js,cypress/e2e/cfc/ManageTickets/NormalWrongAssginmentFlow.cy.js,cypress/e2e/cfc/ManageTickets/WrongAssginmentIviva.cy.js"
+
+
+
+
+
+
+https://www.youtube.com/watch?v=8h1pUyVHqn0
+
+
