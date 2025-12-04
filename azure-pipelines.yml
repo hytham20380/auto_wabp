@@ -6,6 +6,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  CYPRESS_VIDEO: true
+  CYPRESS_SCREENSHOT_ON_FAILURE: true
+
 steps:
   # 1️⃣ Install Node.js
   - task: NodeTool@0
@@ -14,26 +18,32 @@ steps:
     displayName: 'Install Node.js'
 
   # 2️⃣ Install dependencies inside auto_wabp
-  - script: |
-      cd auto_wabp
-      npm ci
+  - script: npm ci
     displayName: 'Install dependencies'
+    workingDirectory: 'auto_wabp'
 
-  # 3️⃣ Run all Cypress tests
+  # 3️⃣ Run all Cypress tests inside auto_wabp
   - script: |
-      cd auto_wabp
       export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage"
-      npx cypress run --browser chrome --headless
-    displayName: 'Run Cypress Tests'
+      echo "Running all Cypress tests..."
+      npx cypress run \
+        --browser chrome \
+        --headless \
+        --reporter mocha-junit-reporter \
+        --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
+    displayName: 'Run all Cypress Tests'
+    workingDirectory: 'auto_wabp'
 
-  # 4️⃣ Debug folder structure
+  # 4️⃣ Debug folder structure (optional)
   - script: |
-      echo "=== Listing auto_wabp folder ==="
-      cd auto_wabp
-      ls -R .
-    displayName: 'Debug Folder Structure'
+      echo "=== Listing Cypress folder ==="
+      ls -R cypress || echo "cypress folder not found"
+      echo "=== Listing results folder ==="
+      ls -R results || echo "results folder not found"
+    displayName: 'Debug Cypress output'
+    workingDirectory: 'auto_wabp'
 
-  # 5️⃣ Publish test results
+  # 5️⃣ Publish JUnit test results
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
