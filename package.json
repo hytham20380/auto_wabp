@@ -2,7 +2,8 @@
   "devDependencies": {
     "cypress": "^14.4.0",
     "cypress-file-upload": "^5.0.8",
-    "cypress-repeat": "^2.3.10"
+    "cypress-repeat": "^2.3.10",
+    "mocha-junit-reporter": "^2.2.1"
   },
   "scripts": {
     "test": "cypress run",
