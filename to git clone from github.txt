@@ -1,0 +1,11 @@
+go to your git account >> reprositrey >> git clone "repo link"
+
+create new folder on pc
+run cmd
+type git clone and paste git clone https://github.com/ranamagdy/auto_wabp
+
+git clone https://github.com/ranamagdy/CFC_BE.git
+git clone https://github.com/ranamagdy/auto_wabp
+
+git clone gh repo clone hytham20380/CFC_BE
+
