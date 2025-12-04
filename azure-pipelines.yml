@@ -19,8 +19,8 @@ steps:
 
   # 2️⃣ Install dependencies inside auto_wabp
   - script: npm ci
-    displayName: 'Install dependencies'
     workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
+    displayName: 'Install dependencies'
 
   # 3️⃣ Run all Cypress tests inside auto_wabp
   - script: |
@@ -31,23 +31,23 @@ steps:
         --headless \
         --reporter mocha-junit-reporter \
         --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
-    displayName: 'Run all Cypress Tests'
     workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
+    displayName: 'Run all Cypress Tests'
 
-  # 4️⃣ Debug folder structure (optional)
+  # 4️⃣ Debug folder structure inside auto_wabp (optional)
   - script: |
       echo "=== Listing Cypress folder ==="
       ls -R cypress || echo "cypress folder not found"
       echo "=== Listing results folder ==="
       ls -R results || echo "results folder not found"
-    displayName: 'Debug Cypress output'
     workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
+    displayName: 'Debug Cypress output'
 
   # 5️⃣ Publish JUnit test results
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
-      testResultsFiles: 'auto_wabp/results/*.xml'
+      testResultsFiles: '$(Build.SourcesDirectory)/auto_wabp/results/*.xml'
       mergeTestResults: true
       testRunTitle: 'Cypress Tests'
 
@@ -55,7 +55,7 @@ steps:
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
-      PathtoPublish: 'auto_wabp/cypress/screenshots'
+      PathtoPublish: '$(Build.SourcesDirectory)/auto_wabp/cypress/screenshots'
       ArtifactName: 'screenshots'
       publishLocation: 'Container'
 
@@ -63,6 +63,6 @@ steps:
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
-      PathtoPublish: 'auto_wabp/cypress/videos'
+      PathtoPublish: '$(Build.SourcesDirectory)/auto_wabp/cypress/videos'
       ArtifactName: 'videos'
       publishLocation: 'Container'
