@@ -11,6 +11,10 @@ variables:
   CYPRESS_SCREENSHOT_ON_FAILURE: true
 
 steps:
+  # 0️⃣ Checkout repository
+  - checkout: self
+    clean: true
+
   # 1️⃣ Install Node.js
   - task: NodeTool@0
     inputs:
@@ -22,19 +26,37 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
     displayName: 'Install dependencies'
 
-  # 3️⃣ Run all Cypress tests inside auto_wabp
+  # 3️⃣ Run Cypress tests sequentially by folder
   - script: |
       export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage"
-      echo "Running all Cypress tests..."
+
+      echo "Running Login tests..."
       npx cypress run \
         --browser chrome \
         --headless \
-        --reporter mocha-junit-reporter \
-        --reporter-options "mochaFile=results/cypress-[hash].xml,toConsole=true"
-    workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
-    displayName: 'Run all Cypress Tests'
+        --spec "cypress/e2e/login/*.cy.js" \
+        --reporter spec \
+        --reporter-options "mochaFile=results/login-[hash].xml,toConsole=true"
 
-  # 4️⃣ Debug folder structure inside auto_wabp (optional)
+      echo "Running Agent tests..."
+      npx cypress run \
+        --browser chrome \
+        --headless \
+        --spec "cypress/e2e/agents/*.cy.js" \
+        --reporter spec \
+        --reporter-options "mochaFile=results/agents-[hash].xml,toConsole=true"
+
+      echo "Running Campaign tests..."
+      npx cypress run \
+        --browser chrome \
+        --headless \
+        --spec "cypress/e2e/campaign/*.cy.js" \
+        --reporter spec \
+        --reporter-options "mochaFile=results/campaign-[hash].xml,toConsole=true"
+    workingDirectory: '$(Build.SourcesDirectory)/auto_wabp'
+    displayName: 'Run Cypress Tests Sequentially'
+
+  # 4️⃣ Debug folder structure (optional)
   - script: |
       echo "=== Listing Cypress folder ==="
       ls -R cypress || echo "cypress folder not found"
@@ -47,7 +69,7 @@ steps:
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
-      testResultsFiles: '$(Build.SourcesDirectory)/auto_wabp/results/*.xml'
+      testResultsFiles: 'auto_wabp/results/*.xml'
       mergeTestResults: true
       testRunTitle: 'Cypress Tests'
 
@@ -55,7 +77,7 @@ steps:
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
-      PathtoPublish: '$(Build.SourcesDirectory)/auto_wabp/cypress/screenshots'
+      PathtoPublish: 'auto_wabp/cypress/screenshots'
       ArtifactName: 'screenshots'
       publishLocation: 'Container'
 
@@ -63,6 +85,6 @@ steps:
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     inputs:
-      PathtoPublish: '$(Build.SourcesDirectory)/auto_wabp/cypress/videos'
+      PathtoPublish: 'auto_wabp/cypress/videos'
       ArtifactName: 'videos'
       publishLocation: 'Container'
